@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gallery — S A N K Ā R A Sanctuary | Visual Archive</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Space Grotesk & Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with Forms and Container Queries Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration Verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary-container": "#7a5744",
+            "secondary": "#7a5743",
+            "primary": "#001a13",
+            "on-primary-fixed-variant": "#304c43",
+            "background": "#fbf9f2",
+            "error-container": "#ffdad6",
+            "surface-container-highest": "#e4e2dc",
+            "error": "#ba1a1a",
+            "on-primary-fixed": "#032019",
+            "on-error-container": "#93000a",
+            "primary-container": "#132f27",
+            "tertiary-fixed": "#ffdad3",
+            "inverse-on-surface": "#f3f1ea",
+            "tertiary-fixed-dim": "#ffb4a4",
+            "outline-variant": "#c1c8c4",
+            "surface-variant": "#e4e2dc",
+            "on-error": "#ffffff",
+            "tertiary-container": "#551004",
+            "secondary-fixed": "#ffdbc9",
+            "surface-tint": "#48645a",
+            "on-tertiary-fixed-variant": "#7c2d1c",
+            "on-surface": "#1b1c18",
+            "surface-container-high": "#eae8e1",
+            "on-primary": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "on-background": "#1b1c18",
+            "surface-container-low": "#f6f4ed",
+            "on-primary-container": "#7a988d",
+            "primary-fixed": "#cae9dd",
+            "on-secondary": "#ffffff",
+            "surface": "#fbf9f2",
+            "on-surface-variant": "#414845",
+            "secondary-container": "#ffd0b8",
+            "inverse-primary": "#aecdc1",
+            "surface-dim": "#dcdad3",
+            "on-secondary-fixed-variant": "#5f3f2d",
+            "tertiary": "#330400",
+            "secondary-fixed-dim": "#ebbda5",
+            "on-tertiary-fixed": "#3e0500",
+            "surface-container": "#f0eee7",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary-fixed": "#2d1506",
+            "on-tertiary-container": "#da745e",
+            "surface-bright": "#fbf9f2",
+            "inverse-surface": "#30312c",
+            "primary-fixed-dim": "#aecdc1",
+            "outline": "#727975"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin": "1.25rem",
+            "space-xl": "4.5rem",
+            "space-sm": "0.75rem",
+            "space-lg": "2.5rem",
+            "margin-desktop": "5rem",
+            "gutter-tablet": "2rem",
+            "gutter": "1.5rem",
+            "margin-tablet": "3rem",
+            "gutter-desktop": "3rem",
+            "space-md": "1.5rem",
+            "space-xs": "0.375rem"
+          },
+          "fontFamily": {
+            "display": [
+              "Space Grotesk"
+            ],
+            "headline-lg": [
+              "Space Grotesk"
+            ],
+            "body-md": [
+              "Plus Jakarta Sans"
+            ],
+            "label-lg": [
+              "Space Grotesk"
+            ],
+            "display-mobile": [
+              "Space Grotesk"
+            ],
+            "body-sm": [
+              "Plus Jakarta Sans"
+            ],
+            "headline-md": [
+              "Space Grotesk"
+            ],
+            "label-md": [
+              "Space Grotesk"
+            ],
+            "headline-lg-mobile": [
+              "Space Grotesk"
+            ],
+            "headline-sm": [
+              "Space Grotesk"
+            ],
+            "label-sm": [
+              "Space Grotesk"
+            ],
+            "body-lg": [
+              "Plus Jakarta Sans"
+            ]
+          },
+          "fontSize": {
+            "display": [
+              "56px",
+              {
+                "lineHeight": "64px",
+                "letterSpacing": "0.18em",
+                "fontWeight": "400"
+              }
+            ],
+            "headline-lg": [
+              "38px",
+              {
+                "lineHeight": "48px",
+                "letterSpacing": "0.18em",
+                "fontWeight": "400"
+              }
+            ],
+            "body-md": [
+              "15px",
+              {
+                "lineHeight": "26px",
+                "letterSpacing": "0.0em",
+                "fontWeight": "400"
+              }
+            ],
+            "label-lg": [
+              "13px",
+              {
+                "lineHeight": "18px",
+                "letterSpacing": "0.18em",
+                "fontWeight": "500"
+              }
+            ],
+            "display-mobile": [
+              "36px",
+              {
+                "lineHeight": "44px",
+                "letterSpacing": "0.14em",
+                "fontWeight": "400"
+              }
+            ],
+            "body-sm": [
+              "13px",
+              {
+                "lineHeight": "20px",
+                "letterSpacing": "0.01em",
+                "fontWeight": "400"
+              }
+            ],
+            "headline-md": [
+              "24px",
+              {
+                "lineHeight": "32px",
+                "letterSpacing": "0.12em",
+                "fontWeight": "500"
+              }
+            ],
+            "label-md": [
+              "11px",
+              {
+                "lineHeight": "16px",
+                "letterSpacing": "0.18em",
+                "fontWeight": "500"
+              }
+            ],
+            "headline-lg-mobile": [
+              "26px",
+              {
+                "lineHeight": "34px",
+                "letterSpacing": "0.12em",
+                "fontWeight": "400"
+              }
+            ],
+            "headline-sm": [
+              "18px",
+              {
+                "lineHeight": "26px",
+                "letterSpacing": "0.10em",
+                "fontWeight": "500"
+              }
+            ],
+            "label-sm": [
+              "10px",
+              {
+                "lineHeight": "14px",
+                "letterSpacing": "0.20em",
+                "fontWeight": "600"
+              }
+            ],
+            "body-lg": [
+              "18px",
+              {
+                "lineHeight": "30px",
+                "letterSpacing": "-0.01em",
+                "fontWeight": "400"
+              }
+            ]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+<body class="bg-surface-container-low text-on-surface font-body-md antialiased selection:bg-secondary selection:text-surface-container-lowest">
+<!-- TOP APP BAR / WEB HEADER (Shared Component Executed Exactly from JSON Specs) -->
+<header class="bg-surface/90 dark:bg-surface-container/90 backdrop-blur-md text-primary dark:text-inverse-primary docked full-width top-0 sticky z-50 border-b border-outline-variant/30 dark:border-outline/20">
+<div class="flex justify-between items-center w-full px-margin md:px-margin-desktop py-space-sm max-w-full">
+<!-- Brand Logo -->
+<a class="font-headline-sm text-headline-sm tracking-[0.25em] text-primary dark:text-inverse-primary font-medium hover:opacity-80 transition-opacity" href="#">
+        S A N K Ā R A
+      </a>
+<!-- Center Links (Desktop) -->
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-inverse-primary transition-colors duration-200 pb-1 text-label-lg font-label-lg uppercase tracking-widest" href="#">
+          Home
+        </a>
+<a class="text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-inverse-primary transition-colors duration-200 pb-1 text-label-lg font-label-lg uppercase tracking-widest" href="#">
+          Rooms
+        </a>
+<!-- Active Nav: Gallery -->
+<a class="text-primary dark:text-inverse-primary border-b border-primary dark:border-inverse-primary pb-1 text-label-lg font-label-lg uppercase tracking-widest" href="#">
+          Gallery
+        </a>
+<a class="text-on-surface-variant dark:text-outline hover:text-primary dark:hover:text-inverse-primary transition-colors duration-200 pb-1 text-label-lg font-label-lg uppercase tracking-widest" href="#">
+          Location
+        </a>
+</nav>
+<!-- Trailing Action -->
+<div class="flex items-center space-x-4">
+<button class="bg-[#C86651] text-surface-container-lowest hover:bg-primary-container px-6 py-2.5 rounded-full text-label-sm font-label-sm uppercase tracking-widest font-medium transition-all duration-300 shadow-sm flex items-center gap-1.5">
+<span>Book Now</span>
+</button>
+</div>
+</div>
+</header>
+<main>
+<!-- SECTION 1: PAGE TITLE & CATEGORY FILTER ARCHIVE -->
+<section class="pt-space-xl pb-space-lg px-margin md:px-margin-desktop bg-surface-container-low border-b border-outline-variant/30">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<!-- Left Editorial Typography -->
+<div class="space-y-space-xs">
+<div class="flex items-center gap-2">
+<span class="inline-block w-6 h-[1px] bg-[#CA9F88]"></span>
+<span class="text-label-sm font-label-sm uppercase tracking-[0.25em] text-[#CA9F88]">
+              VISUAL ARCHIVE &amp; SANCTUARY PERSPECTIVES
+            </span>
+</div>
+<h1 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-primary tracking-[0.20em] uppercase font-medium">
+            GALLERY
+          </h1>
+<p class="text-label-md font-label-md text-on-surface-variant tracking-[0.16em] uppercase">
+            A VISUAL TOUR OF SANKĀRA — CREATING WELL BEING
+          </p>
+</div>
+<!-- Right Controls & Metric -->
+<div class="flex flex-col sm:flex-row sm:items-center gap-space-sm md:gap-space-md">
+<!-- Active filter counter -->
+<div class="text-label-sm font-label-sm text-outline tracking-[0.2em] uppercase border-l border-outline-variant/40 pl-3">
+            32 CURATED PLATES
+          </div>
+<!-- Category Filter Pills -->
+<div class="flex flex-wrap items-center gap-2" id="gallery-filters" role="tablist">
+<button class="bg-[#C86651] text-surface-container-lowest px-5 py-2 rounded-full text-label-sm font-label-sm uppercase tracking-widest font-medium shadow-sm transition-all" data-filter="all">
+              All
+            </button>
+<button class="border border-primary-container/20 text-on-surface-variant hover:border-primary-container hover:text-primary-container px-5 py-2 rounded-full text-label-sm font-label-sm uppercase tracking-widest transition-all bg-transparent" data-filter="suites">
+              Suites
+            </button>
+<button class="border border-primary-container/20 text-on-surface-variant hover:border-primary-container hover:text-primary-container px-5 py-2 rounded-full text-label-sm font-label-sm uppercase tracking-widest transition-all bg-transparent" data-filter="rooftop">
+              Rooftop &amp; Dining
+            </button>
+<button class="border border-primary-container/20 text-on-surface-variant hover:border-primary-container hover:text-primary-container px-5 py-2 rounded-full text-label-sm font-label-sm uppercase tracking-widest transition-all bg-transparent" data-filter="architecture">
+              Architecture &amp; Grounds
+            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: EDITORIAL MASONRY PHOTO GRID -->
+<section class="py-space-xl px-margin md:px-margin-desktop bg-surface-bright">
+<div class="max-w-7xl mx-auto">
+<!-- Architectural Asymmetric Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter-desktop">
+<!-- Card 1: Large / Tall - 7 Columns (Plate 01) -->
+<div class="md:col-span-7 group relative bg-surface-container border border-primary-container/10 overflow-hidden flex flex-col justify-between">
+<div class="relative overflow-hidden aspect-[4/5] w-full bg-surface-container-high">
+<img class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" data-alt="Monolithic modern architecture at Sankāra sanctuary pavilion featuring cantilevered teakwood beams and hand-troweled warm lime plaster walls. A calm reflection pool borders the building, reflecting the morning mist rolling off tropical mountain ridges in Sri Lanka. High-key natural morning light bathes the tactile stone pavers and natural materials in a deep serene atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4HsHVNnHR2a1XlPycONW0MJoIujCEb8wSquiOWJQQNDUAa4Yhdhypk6rXVQxZFcPybbCtarX37TjGXBOl7-_pB7y18a9QQN2uoyE8zJUr96VxYuVRQl_DPdAtVcp4KSwBvVrkLqGRA6Gt95OX1w1fPXtTuZwhrvrRWQmK9GeBSd7MiPiPW3G9UyZUyzeAjj0IxEakGt7RkqMO_hxMbsUmalfMShVGc9h8_dGBEWnFRnYlefC34Msa5A"/>
+<div class="absolute top-4 left-4 z-10">
+<span class="bg-surface-container-low/90 backdrop-blur-sm text-primary px-3 py-1 text-label-sm font-label-sm uppercase tracking-[0.2em] border border-[#CA9F88]">
+                  GROUNDS · 07°18'N
+                </span>
+</div>
+<div class="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span class="w-9 h-9 flex items-center justify-center bg-primary-container text-surface-container-lowest rounded-full shadow-md">
+<span class="material-symbols-outlined text-[18px]">zoom_in</span>
+</span>
+</div>
+</div>
+<div class="p-space-md bg-surface-container-lowest border-t border-primary-container/10 flex justify-between items-end">
+<div>
+<p class="text-label-sm font-label-sm text-[#CA9F88] tracking-[0.2em] uppercase">PLATE 01</p>
+<h3 class="text-headline-sm font-headline-sm text-primary tracking-[0.10em] uppercase mt-1">
+                  Pabellón Principal &amp; Monolithic Granite
+                </h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">
+                  Hand-quarried gneiss stone, tactile timber horizons, cantilevered colonnades.
+                </p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-[#C86651] transition-colors">
+                arrow_outward
+              </span>
+</div>
+</div>
+<!-- Card 2: Standard Suite - 5 Columns (Plate 02) -->
+<div class="md:col-span-5 group relative bg-surface-container border border-primary-container/10 overflow-hidden flex flex-col justify-between">
+<div class="relative overflow-hidden aspect-[4/5] w-full bg-surface-container-high">
+<img class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" data-alt="Sunlight-drenched luxury sanctuary bedroom with raw tactile Belgian linen bedding in warm ecru and soft cream tones. A bespoke timber headboard rests against textured limestone walls with golden morning sun beams streaming through full-height minimalist glass doors. Through the expansive window, a lush cloud forest stretches out toward misty horizons." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA29DTJSFl7n7IPkTUDHLHG8wQ-czP18GVUD1YmTq3WZIauD5ajO_UhQIwbQcSbiDl9LAX7qrVMEhXFoQclQn084f0H6lHgOfYDDPyG3A7d_JClNOFDq1am0xXudpZjVDsEgBiYSphoEg7eNWo9_cUiqOhkXRUajfeASDhQ21L614x_x7ob32M4NoGnHWiiQPltiGVr4NOPmGyQX7fJWwOg8trMxIVTwK_UXxXAs2PU6LM0tX9do0o-jA"/>
+<div class="absolute top-4 left-4 z-10">
+<span class="bg-surface-container-low/90 backdrop-blur-sm text-primary px-3 py-1 text-label-sm font-label-sm uppercase tracking-[0.2em] border border-[#CA9F88]">
+                  SUITES · RIDGE VILLA
+                </span>
+</div>
+<div class="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span class="w-9 h-9 flex items-center justify-center bg-primary-container text-surface-container-lowest rounded-full shadow-md">
+<span class="material-symbols-outlined text-[18px]">zoom_in</span>
+</span>
+</div>
+</div>
+<div class="p-space-md bg-surface-container-lowest border-t border-primary-container/10 flex justify-between items-end">
+<div>
+<p class="text-label-sm font-label-sm text-[#CA9F88] tracking-[0.2em] uppercase">PLATE 02</p>
+<h3 class="text-headline-sm font-headline-sm text-primary tracking-[0.10em] uppercase mt-1">
+                  Forest Suite Sanctuary
+                </h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">
+                  Belgian raw weave linens, quiet acoustics, unobstructed cloud canopy.
+                </p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-[#C86651] transition-colors">
+                arrow_outward
+              </span>
+</div>
+</div>
+<!-- Card 3: Standard - 5 Columns (Plate 03) -->
+<div class="md:col-span-5 group relative bg-surface-container border border-primary-container/10 overflow-hidden flex flex-col justify-between">
+<div class="relative overflow-hidden aspect-[4/3] w-full bg-surface-container-high">
+<img class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" data-alt="An artisanal botanical craft cocktail in a thin hand-blown crystal tumbler resting on a honed dark granite bar. The cocktail is infused with native Ceylon herbs and garnished with a scorched cinnamon quill and wild mountain thyme. In the soft background, the setting sun paints the sky in shades of terracotta, ochre, and deep twilight green." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDg5mSyZE2DZV_9iOV_V5guo0XmulGrKXR8JIt_ptrQzkS4jDArh5qqZA9Bgt84kznxDxPI4EmkHUjHJDwHGDy2KKirRV4OPPjPFhClRDwmybmopnAjuNliUg7VgkzQWtECphxC00m8kgwUuPW19TWpOQ5sEIPHM753fwCQk0x9VXX9iWjyBmSQSVfva7NJsXCYVYb8XWSmH_S8PXHb-946JTeD1uJVFuzK6BYHs_9OeD_bxByXopBi3w"/>
+<div class="absolute top-4 left-4 z-10">
+<span class="bg-surface-container-low/90 backdrop-blur-sm text-primary px-3 py-1 text-label-sm font-label-sm uppercase tracking-[0.2em] border border-[#CA9F88]">
+                  ROOFTOP · BOTANICA
+                </span>
+</div>
+<div class="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span class="w-9 h-9 flex items-center justify-center bg-primary-container text-surface-container-lowest rounded-full shadow-md">
+<span class="material-symbols-outlined text-[18px]">zoom_in</span>
+</span>
+</div>
+</div>
+<div class="p-space-md bg-surface-container-lowest border-t border-primary-container/10 flex justify-between items-end">
+<div>
+<p class="text-label-sm font-label-sm text-[#CA9F88] tracking-[0.2em] uppercase">PLATE 03</p>
+<h3 class="text-headline-sm font-headline-sm text-primary tracking-[0.10em] uppercase mt-1">
+                  Botanical Aperitif &amp; Ceylon Sunset
+                </h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">
+                  Wild endemic cordials, aged wood smoke, horizon aperitivo hour.
+                </p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-[#C86651] transition-colors">
+                arrow_outward
+              </span>
+</div>
+</div>
+<!-- Card 4: Wide Landscape - 7 Columns (Plate 04) -->
+<div class="md:col-span-7 group relative bg-surface-container border border-primary-container/10 overflow-hidden flex flex-col justify-between">
+<div class="relative overflow-hidden aspect-[16/10] w-full bg-surface-container-high">
+<img class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" data-alt="Architectural infinity plunge pool carved organically into native dark granite bedrock high in the mountains. Still emerald water mirrors passing high-altitude clouds. Surrounding the deck are lush giant tree ferns, moss-covered boulders, and clean architectural concrete coping that melts seamlessly into the untouched cloud rainforest." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvk9yVcX_br46YarLVqEAjpfNvIBpt24gsZV9BR429-nyFkLo67iVPDV0yRC_cpqRgP_59T1s0YP2JRWm-iyRzXU6O9ZGVefKMRhH6ZxEPPXAsb-mUcfzLBwXn92M2QHns7xjGfcqn8uAMDcppDtgKRLGbcoR2tJVCvhqjy7YnC8SiLil3HIe46mhKAI_102ShwX44XpMUfiqj43SZWNe06pBGaui2Budun1-YPopv7ZBF9-5-WbtzUg"/>
+<div class="absolute top-4 left-4 z-10">
+<span class="bg-surface-container-low/90 backdrop-blur-sm text-primary px-3 py-1 text-label-sm font-label-sm uppercase tracking-[0.2em] border border-[#CA9F88]">
+                  WELLNESS · CISTERN
+                </span>
+</div>
+<div class="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span class="w-9 h-9 flex items-center justify-center bg-primary-container text-surface-container-lowest rounded-full shadow-md">
+<span class="material-symbols-outlined text-[18px]">zoom_in</span>
+</span>
+</div>
+</div>
+<div class="p-space-md bg-surface-container-lowest border-t border-primary-container/10 flex justify-between items-end">
+<div>
+<p class="text-label-sm font-label-sm text-[#CA9F88] tracking-[0.2em] uppercase">PLATE 04</p>
+<h3 class="text-headline-sm font-headline-sm text-primary tracking-[0.10em] uppercase mt-1">
+                  Thermal Hydrotherapy Cistern
+                </h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">
+                  Spring-fed mountain minerals, thermal stone beds, therapeutic stillness.
+                </p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-[#C86651] transition-colors">
+                arrow_outward
+              </span>
+</div>
+</div>
+<!-- Card 5: Standard Gastronomy - 4 Columns (Plate 05) -->
+<div class="md:col-span-4 group relative bg-surface-container border border-primary-container/10 overflow-hidden flex flex-col justify-between">
+<div class="relative overflow-hidden aspect-[4/5] w-full bg-surface-container-high">
+<img class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" data-alt="A minimalist gastronomic dish presented on hand-thrown charcoal ceramic stoneware. Crisp heirloom micro-vegetables, cold-pressed seed oils, and an aromatic green herb reduction are arranged with intentional Japanese-inspired culinary minimalism. The setting is illuminated by soft overhead gallery light against a dark walnut surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeXXkxIVrrjeugTa2yEClboSF82sr25luWq5wjs5x5QyNVytZ1gERAguVGvIz7T9Q62hDKXk25M5IeUe-ZEPoINOYz5au8QuMUuCPZZlVXgYj0gYVrrQ_DROl24I1jDvaQFQHqdNi7Aqu5vuwimQEUn_EoUaJatCyFJ1v6oGR346LhMvOSsnHrJFTlklfNGbLF_T0G_EdB48olRQOn_KmJ8s0NOtEjOO8Vem5udNsi3pzX25U6tVIDNQ"/>
+<div class="absolute top-4 left-4 z-10">
+<span class="bg-surface-container-low/90 backdrop-blur-sm text-primary px-3 py-1 text-label-sm font-label-sm uppercase tracking-[0.2em] border border-[#CA9F88]">
+                  DINING · TERROIR
+                </span>
+</div>
+<div class="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span class="w-9 h-9 flex items-center justify-center bg-primary-container text-surface-container-lowest rounded-full shadow-md">
+<span class="material-symbols-outlined text-[18px]">zoom_in</span>
+</span>
+</div>
+</div>
+<div class="p-space-md bg-surface-container-lowest border-t border-primary-container/10 flex justify-between items-end">
+<div>
+<p class="text-label-sm font-label-sm text-[#CA9F88] tracking-[0.2em] uppercase">PLATE 05</p>
+<h3 class="text-headline-sm font-headline-sm text-primary tracking-[0.10em] uppercase mt-1">
+                  Heirloom Terroir Gastronomy
+                </h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">
+                  Estate-foraged botanicals, biodynamic root vegetables, stoneware ceramic.
+                </p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-[#C86651] transition-colors">
+                arrow_outward
+              </span>
+</div>
+</div>
+<!-- Card 6: Tall Courtyard - 4 Columns (Plate 06) -->
+<div class="md:col-span-4 group relative bg-surface-container border border-primary-container/10 overflow-hidden flex flex-col justify-between">
+<div class="relative overflow-hidden aspect-[4/5] w-full bg-surface-container-high">
+<img class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" data-alt="A tranquil open-air stone bathing pavilion inside an internal courtyard garden. A monolithic oval stone soaking tub is filled with pristine warm water and floating white wild gardenia petals. Slatted bamboo screens filter the golden afternoon light onto smooth river gravel and a single potted bonsai fig tree." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmVXCExA-ob32ts1_fTf8gb7RgAWjnyndwLBxiDTUUx6JEejxHcIPVnkzareVBtE5R0HWtiOXaVirUB_FXk4Jcl4n75VwhMq2lDAgE72N7qwf1sKMevSITp0KtCe_7Z5VRUkJqeqFco1NMJi9AJcMafLZf0gINf11b-3QmjYJVAo_dPvSkL-ebOfSvV1nqcVNDCkmn7zqqB9OG9a3un50qkJXnt94Z4JZsLNHWtnfVCDnTvKKyOyhTwA"/>
+<div class="absolute top-4 left-4 z-10">
+<span class="bg-surface-container-low/90 backdrop-blur-sm text-primary px-3 py-1 text-label-sm font-label-sm uppercase tracking-[0.2em] border border-[#CA9F88]">
+                  WELLNESS · RITUAL
+                </span>
+</div>
+<div class="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span class="w-9 h-9 flex items-center justify-center bg-primary-container text-surface-container-lowest rounded-full shadow-md">
+<span class="material-symbols-outlined text-[18px]">zoom_in</span>
+</span>
+</div>
+</div>
+<div class="p-space-md bg-surface-container-lowest border-t border-primary-container/10 flex justify-between items-end">
+<div>
+<p class="text-label-sm font-label-sm text-[#CA9F88] tracking-[0.2em] uppercase">PLATE 06</p>
+<h3 class="text-headline-sm font-headline-sm text-primary tracking-[0.10em] uppercase mt-1">
+                  Enclosed Courtyard Bathing
+                </h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">
+                  Hand-chiseled monolith bath, gardenia petal infusions, silence.
+                </p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-[#C86651] transition-colors">
+                arrow_outward
+              </span>
+</div>
+</div>
+<!-- Card 7: Standard Craft Details - 4 Columns (Plate 07) -->
+<div class="md:col-span-4 group relative bg-surface-container border border-primary-container/10 overflow-hidden flex flex-col justify-between">
+<div class="relative overflow-hidden aspect-[4/5] w-full bg-surface-container-high">
+<img class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" data-alt="Macro flat-lay still life of artisanal hotel room artifacts on warm lime plaster. Includes a hand-stitched tan saddle-leather key sleeve, a solid unlacquered brushed brass room key engraved with Sanskrit characters, an amber glass room perfume flacon, and an embossed deckle-edge cotton guest monograph." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB04GFMDU6ew87nC5G3HOMDwXOb5lbxkQU9jNNJO8H91Q8FshdI-bm9s1uo8z9Tv1GieuQ2DTLFloY0-y04x06GLKrqgwPzrc5pVHAxEkr8dTf0vWuLOLRd5cyU_I46AznS2P6FMzdE6tZunCz6b7eCeLIXpOAHbm2UZrGwR48s0MyxJIX0Ixt-JXcoscx_V4jpYorBa55LXHnzna0yWB_DgNLeQo4bEvr0LNw_v2GEU3GnaGbA4SKMfA"/>
+<div class="absolute top-4 left-4 z-10">
+<span class="bg-surface-container-low/90 backdrop-blur-sm text-primary px-3 py-1 text-label-sm font-label-sm uppercase tracking-[0.2em] border border-[#CA9F88]">
+                  CRAFT · ARTIFACTS
+                </span>
+</div>
+<div class="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span class="w-9 h-9 flex items-center justify-center bg-primary-container text-surface-container-lowest rounded-full shadow-md">
+<span class="material-symbols-outlined text-[18px]">zoom_in</span>
+</span>
+</div>
+</div>
+<div class="p-space-md bg-surface-container-lowest border-t border-primary-container/10 flex justify-between items-end">
+<div>
+<p class="text-label-sm font-label-sm text-[#CA9F88] tracking-[0.2em] uppercase">PLATE 07</p>
+<h3 class="text-headline-sm font-headline-sm text-primary tracking-[0.10em] uppercase mt-1">
+                  Tactile Hospitality Details
+                </h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">
+                  Saddle leather key sleeves, heavy turned brass, bespoke cedar incense.
+                </p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-[#C86651] transition-colors">
+                arrow_outward
+              </span>
+</div>
+</div>
+<!-- Card 8: Wide / Heroic Twilight - 12 Columns (Plate 08) -->
+<div class="md:col-span-12 group relative bg-surface-container border border-primary-container/10 overflow-hidden flex flex-col justify-between">
+<div class="relative overflow-hidden aspect-[16/7] w-full bg-surface-container-high">
+<img class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" data-alt="Breathtaking architectural twilight panorama of the entire Sankāra pavilion perched over the edge of the deep Knuckles mountain range. Warm ambient interior lanterns illuminate the teak pavilions, reflecting softly in the perimeter water gardens against the deep indigo blue and violet equatorial evening sky. Rolling cloud mist blankets the tropical valley below." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDE1SsVx2lM2Ksj5Pt1ahM5CMPlRYlLJZ0dTmT7ZexOvk4yqMWk02i_EcBrV64PsHJypUXynYpM_KDCR0AmnU31h0YtuaPJ8-xl4GF0fxhSw7SYe-mZAaE1oLaMNlZdoifb-hcyrPBBT-Doo5X5jwX-nqCfGKjWxROvHZL4rgFTdNzFLDXdjUegSMwRuyXE_GMaW7S9BlkCz5Glby5R4NVU4kinkfdm34-09UK8arbPbRJd78DKIb_ypQ"/>
+<div class="absolute top-6 left-6 z-10">
+<span class="bg-surface-container-low/90 backdrop-blur-sm text-primary px-4 py-1.5 text-label-sm font-label-sm uppercase tracking-[0.2em] border border-[#CA9F88]">
+                  PANORAMA · 1,420M ELEVATION
+                </span>
+</div>
+<div class="absolute top-6 right-6 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span class="w-10 h-10 flex items-center justify-center bg-primary-container text-surface-container-lowest rounded-full shadow-md">
+<span class="material-symbols-outlined text-[20px]">zoom_in</span>
+</span>
+</div>
+</div>
+<div class="p-space-md md:p-space-lg bg-surface-container-lowest border-t border-primary-container/10 flex flex-col md:flex-row justify-between items-start md:items-end gap-space-sm">
+<div>
+<p class="text-label-sm font-label-sm text-[#CA9F88] tracking-[0.2em] uppercase">PLATE 08 · ARCHITECTURAL HORIZON</p>
+<h3 class="text-headline-md font-headline-md text-primary tracking-[0.12em] uppercase mt-1">
+                  Equatorial Dusk over Knuckles Massif
+                </h3>
+<p class="text-body-md font-body-md text-on-surface-variant max-w-2xl mt-1">
+                  As night falls across the highlands, thermal air inversions draw cool mist over the timber eaves, welcoming restorative slumber and contemplative quiet.
+                </p>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-label-sm font-label-sm uppercase tracking-widest text-outline">Leica SL2 · 35mm Summicron</span>
+<span class="w-8 h-8 rounded-full border border-primary-container/20 flex items-center justify-center text-primary-container group-hover:bg-[#C86651] group-hover:text-surface-container-lowest group-hover:border-[#C86651] transition-all">
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination / Load Action -->
+<div class="mt-space-xl text-center">
+<button class="inline-flex items-center gap-2 border border-primary-container text-primary-container hover:bg-surface-container px-8 py-3.5 text-label-lg font-label-lg uppercase tracking-widest transition-colors duration-200">
+<span>Explore Complete Archive (24 Remaining Plates)</span>
+<span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+</div>
+</div>
+</section>
+<!-- SECTION 3: INSTAGRAM FEED STRIP ("SANCTUARY DISPATCHES") -->
+<section class="py-space-xl bg-surface-container-low border-t border-b border-outline-variant/30">
+<div class="max-w-7xl mx-auto px-margin md:px-margin-desktop mb-space-md text-center">
+<div class="inline-flex items-center gap-2 mb-2">
+<span class="inline-block w-4 h-[1px] bg-[#C86651]"></span>
+<span class="text-label-sm font-label-sm uppercase tracking-[0.25em] text-[#C86651] font-medium">
+            @SANKARAHOTEL
+          </span>
+<span class="inline-block w-4 h-[1px] bg-[#C86651]"></span>
+</div>
+<h2 class="text-headline-md font-headline-md text-primary tracking-[0.15em] uppercase font-medium">
+          MOMENTS FROM THE RIDGE
+        </h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-2 max-w-md mx-auto">
+          Unfiltered fragments of morning dew, tea leaf harvesting, open fires, and silent contemplation.
+        </p>
+</div>
+<!-- 5-Photo Seamless Minimal Strip -->
+<div class="grid grid-cols-2 md:grid-cols-5 gap-1.5 md:gap-2 px-2 md:px-6">
+<!-- Insta 1 -->
+<div class="group relative aspect-square overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Misty morning dawn rising through dense tropical bamboo forests surrounding Sankāra retreat. Golden shafts of sunrise light cut through thick mountain fog, casting delicate silhouettes of wild ferns and quiet stone trails." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcRXOwkSZ9rVJtPvjbOdX8IKN1FCusrzzZttpM8wVvJgssCDZGFDYhk9Z5WMwL8IxpgV3cyanKpw_V9clf834fnP09mh5J0fW7S8Yqf9AcUmgFwBrh9t6u3ulZnhaMEhr8wqPj-ukEkONrHjn9jA78OPuHoZ1-RPe5Fn3qbvtwYPGvLjiibM9ILHLAEajPYK6HU9-M47SFoNvKVuBxbTlDR_z7ZfZtFLdvTmCZpEdSj07cGMUKMjWgPw"/>
+<div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-surface-container-lowest">
+<span class="text-label-sm font-label-sm uppercase tracking-widest flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">photo_camera</span> 06:14 AM
+            </span>
+</div>
+</div>
+<!-- Insta 2 -->
+<div class="group relative aspect-square overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Freshly plucked high-grown Ceylon green tea leaves resting inside a handcrafted split-reed woven basket. Dew droplets shine on the tender leaves against rustic weathered teakwood boards in soft natural diffused daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeTi-ddxbJMLimr06AnL97dCIP4-usKAWdnTxzR4AD-7-QoPcjQLyykq6RXLiikf4MC15XO-SDde2YqOPqHnpC6HNc4j2Nix0tYyI0iHU8jQ2Q0vw1LWfTYx8m34tiwFtViHY3lIrsPdchMEYgzTC0tttftQmNSswozAZfYT1Nh-ma6Pul7hs-Rduyeyoh9pyq1nlpSKNmXpJuUcw_sTFRF3RJu8xaOh7bK0KSRMATWtpaAtBmJwmMKA"/>
+<div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-surface-container-lowest">
+<span class="text-label-sm font-label-sm uppercase tracking-widest flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">photo_camera</span> TEA HARVEST
+            </span>
+</div>
+</div>
+<!-- Insta 3 -->
+<div class="group relative aspect-square overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Two hand-pinched rustic ceramic cups of steaming herbal infusion sitting on a rough-hewn stone bench in a serene outdoor rain courtyard. A single green leaf floats in the golden liquor as fine rain drops fall into a nearby stone water trough." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAg9qz_WCNTJhkKU8APbE9EUmQFsCDvdz6BA5zh92xDk8-au40ZJuYQ4WX8_rAQ6Mm0DbVwBoWBuXMAkzT-dbY9juIbivmBh-NLC5JDxCJ9fy2keAtlW0ftwTqbE8Dqck9FRxW1Dd7rK3WIyCSkLUbSGjNORLlniklN4arB5kcMxrLr5cZTPCSxFusVT58QBs7Iqz0k_7M8Jc18mpZv2yJBABWrwklhNTpZ8L-S8ZnoKlrOR1TGiZwrZQ"/>
+<div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-surface-container-lowest">
+<span class="text-label-sm font-label-sm uppercase tracking-widest flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">photo_camera</span> INFUSION
+            </span>
+</div>
+</div>
+<!-- Insta 4 -->
+<div class="group relative aspect-square overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="An outdoor sunken circular fire pit glowing with fragrant sandalwood logs at nightfall. Soft smoke drifts upward against a backdrop of dark mountain peaks and subtle architectural timber silhouettes of the retreat." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyf0HCsGHr-PK5eR8muZpa3DfXu5C_L9UmOs8LH0D3qpRtc-h_P64U9OhkoAOQf941KQm0ho6R194_tXDD0S97z-q_FHlBqBRPeSF2ilKZIuhNt_24X8r_bUXG-CirojW6CLlvt9xcfQ4r9DoXJDlJ9jgjOUy2dTrUYiGzbOgXDZDOZCyQ-dmAd7fWF5wD1B4mpZDBV4I777lh35uBQDTznxqHuIOdCK4V4IRO1jLcslXX8924a8PYew"/>
+<div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-surface-container-lowest">
+<span class="text-label-sm font-label-sm uppercase tracking-widest flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">photo_camera</span> FIRESIDE DUSK
+            </span>
+</div>
+</div>
+<!-- Insta 5 -->
+<div class="group relative aspect-square overflow-hidden bg-surface-container col-span-2 md:col-span-1">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="An open-sided yoga and meditation pavilion crafted with raw cedar posts and polished clay floors overlooking an endless valley of clouds. A woven meditation mat lies empty in gentle morning silence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnN2VHGAO440fGnkuze-59IBU99z0TI9TrX2-r4CyzFhPFDvS8B-Vjx6KP6ssTcq5PPkmnEtjaLU5U5jOw5UZRDdXI0w7OJysTcitu9ENx38qTrYlx5GsSDYo_V4HbYGAzM8ofJEF9ttSt0EXY1B_DrBVSctEh0ZbXBTL_iVvnLQJXKy6qbWfjzpG279CURq_jWlx8pOYsBFihEjOeYU_-glAc92LdgAIep9SovwTZGL3JXsAytMq9sw"/>
+<div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-surface-container-lowest">
+<span class="text-label-sm font-label-sm uppercase tracking-widest flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">photo_camera</span> SHALA
+            </span>
+</div>
+</div>
+</div>
+<!-- Journal Link -->
+<div class="mt-space-md text-center">
+<a class="inline-flex items-center gap-2 text-label-md font-label-md text-primary tracking-[0.2em] uppercase hover:text-[#CA9F88] transition-colors duration-200" href="#">
+<span>Follow our daily journal @sankarahotel</span>
+<span class="material-symbols-outlined text-[16px]">arrow_right_alt</span>
+</a>
+</div>
+</section>
+</main>
+<!-- FOOTER (Shared Component Executed Exactly from JSON Specs) -->
+<footer class="bg-primary dark:bg-surface-container-lowest text-on-primary dark:text-on-surface docked full-width bottom-0 w-full border-t border-outline/20">
+<div class="w-full px-margin md:px-margin-desktop py-space-xl flex flex-col justify-between gap-space-lg">
+<!-- Upper Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-lg">
+<!-- Left: Logo & Sanctuary Manifesto -->
+<div class="md:col-span-5 space-y-4">
+<div class="font-headline-md text-headline-md tracking-[0.25em] text-secondary-fixed dark:text-secondary font-medium">
+            S A N K Ā R A
+          </div>
+<p class="text-label-sm font-label-sm uppercase tracking-[0.20em] text-[#CA9F88]">
+            CREATING WELL BEING
+          </p>
+<p class="text-body-sm font-body-sm text-primary-fixed-dim dark:text-on-surface-variant max-w-sm leading-relaxed">
+            An architectural retreat dedicated to mindful deceleration, biophilic restoration, and quiet stillness nestled along the mist-shrouded ridges of Sri Lanka.
+          </p>
+</div>
+<!-- Center: Navigation Links -->
+<div class="md:col-span-3 space-y-3">
+<h4 class="text-label-md font-label-md uppercase tracking-widest text-surface-container-high dark:text-primary">
+            Sanctuary Index
+          </h4>
+<ul class="space-y-2 text-body-sm font-body-sm">
+<li>
+<a class="text-primary-fixed-dim dark:text-on-surface-variant hover:text-surface-bright dark:hover:text-primary transition-colors duration-200" href="#">Home</a>
+</li>
+<li>
+<a class="text-primary-fixed-dim dark:text-on-surface-variant hover:text-surface-bright dark:hover:text-primary transition-colors duration-200" href="#">Rooms</a>
+</li>
+<li>
+<!-- Active link in footer -->
+<a class="text-surface-bright dark:text-primary font-medium transition-colors duration-200" href="#">Gallery</a>
+</li>
+<li>
+<a class="text-primary-fixed-dim dark:text-on-surface-variant hover:text-surface-bright dark:hover:text-primary transition-colors duration-200" href="#">Location</a>
+</li>
+<li>
+<a class="text-primary-fixed-dim dark:text-on-surface-variant hover:text-surface-bright dark:hover:text-primary transition-colors duration-200" href="#">Policies</a>
+</li>
+<li>
+<a class="text-primary-fixed-dim dark:text-on-surface-variant hover:text-surface-bright dark:hover:text-primary transition-colors duration-200" href="#">Concierge</a>
+</li>
+</ul>
+</div>
+<!-- Right: Concierge Contacts -->
+<div class="md:col-span-4 space-y-3">
+<h4 class="text-label-md font-label-md uppercase tracking-widest text-surface-container-high dark:text-primary">
+            Concierge Satellite
+          </h4>
+<div class="space-y-2 text-body-sm font-body-sm text-primary-fixed-dim dark:text-on-surface-variant">
+<p class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#CA9F88]">location_on</span>
+<span>Knuckles Ridge Corridor, Range 4, Central Province</span>
+</p>
+<p class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#CA9F88]">mail</span>
+<span>concierge@sankarahotel.com</span>
+</p>
+<p class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#CA9F88]">call</span>
+<span>+94 81 742 9000 (Satellite Desk)</span>
+</p>
+<div class="pt-2">
+<span class="inline-block px-3 py-1 bg-primary-container border border-outline-variant/30 text-label-sm font-label-sm uppercase tracking-widest text-surface-bright">
+                Coordinates · 07°18'22"N 80°45'11"E
+              </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Line & Copyright -->
+<div class="border-t border-outline/20 pt-space-md flex flex-col md:flex-row justify-between items-center gap-4 text-body-sm font-body-sm text-primary-fixed-dim dark:text-on-surface-variant">
+<p>© 2024 S A N K Ā R A Sanctuary. All rights reserved.</p>
+<div class="flex items-center space-x-6 text-label-sm font-label-sm uppercase tracking-widest">
+<a class="hover:text-secondary-fixed dark:hover:text-secondary transition-colors duration-200" href="#">Environmental Accords</a>
+<a class="hover:text-secondary-fixed dark:hover:text-secondary transition-colors duration-200" href="#">Privacy Protocol</a>
+<a class="hover:text-secondary-fixed dark:hover:text-secondary transition-colors duration-200" href="#">Silent Hours Policy</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- Light interactive script for category pills -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterButtons = document.querySelectorAll('#gallery-filters button');
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterButtons.forEach(b => {
+            b.className = "border border-primary-container/20 text-on-surface-variant hover:border-primary-container hover:text-primary-container px-5 py-2 rounded-full text-label-sm font-label-sm uppercase tracking-widest transition-all bg-transparent";
+          });
+          btn.className = "bg-[#C86651] text-surface-container-lowest px-5 py-2 rounded-full text-label-sm font-label-sm uppercase tracking-widest font-medium shadow-sm transition-all";
+        });
+      });
+    });
+  </script>
+</body></html>
