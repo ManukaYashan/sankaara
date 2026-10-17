@@ -47,11 +47,27 @@ export default function Navbar() {
         {/* Brand */}
         <Link
           to="/"
-          className="text-[#132f27] hover:text-[#c86651] transition-colors duration-300
-                     tracking-[0.28em] shrink-0"
-          style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '0.9375rem', fontWeight: 400 }}
+          className="flex items-center gap-3 text-[#132f27] hover:text-[#c86651] transition-colors duration-300 group shrink-0"
         >
-          S A N K Ā R A
+          <img
+            src="./images/logo/sankara_logo_ivory.jpg"
+            alt="S A N K Ā R A Emblem"
+            className="w-9 h-9 md:w-10 md:h-10 object-contain rounded-[2px] border border-[#ca9f88]/40 shadow-sm transition-transform duration-300 group-hover:scale-105"
+          />
+          <div className="flex flex-col">
+            <span
+              className="tracking-[0.28em] leading-none"
+              style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '0.9375rem', fontWeight: 400 }}
+            >
+              S A N K Ā R A
+            </span>
+            <span
+              className="text-[0.5625rem] tracking-[0.22em] uppercase text-[#ca9f88] font-medium mt-1"
+              style={{ fontFamily: "'Montserrat', sans-serif" }}
+            >
+              Boutique Hotel
+            </span>
+          </div>
         </Link>
 
         {/* Desktop Nav */}
