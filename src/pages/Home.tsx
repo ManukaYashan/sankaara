@@ -139,17 +139,19 @@ export default function Home() {
 
         {/* Hero text */}
         <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-6 pt-20 pb-28 max-w-4xl mx-auto w-full">
-          <div className="flex items-center justify-center gap-3 sm:gap-4 mb-5 max-w-full">
-            <span className="w-6 sm:w-10 h-px bg-gradient-to-r from-transparent to-[#ca9f88]/90 shrink-0" />
+          <div className="inline-flex items-center justify-center gap-2.5 sm:gap-3 px-5 sm:px-6 py-2 mb-6
+                          border border-[#ca9f88]/60 bg-[#132f27]/35 backdrop-blur-md
+                          shadow-[0_8px_30px_rgba(0,0,0,0.25)] rounded-[2px] max-w-full">
+            <span className="w-1.5 h-1.5 bg-[#ca9f88] rounded-full shrink-0 opacity-75 hidden xs:inline-block" />
             <span
-              className="text-[#fbf9f2] text-[0.6rem] sm:text-[0.72rem]
-                         tracking-[0.26em] sm:tracking-[0.32em] uppercase font-light
-                         drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] truncate"
+              className="text-[#fbf9f2] text-[0.58rem] sm:text-[0.72rem]
+                         tracking-[0.24em] sm:tracking-[0.32em] uppercase font-light
+                         drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)] truncate"
               style={{ fontFamily: "'Montserrat', sans-serif" }}
             >
               Valley Ridge Sanctuary · Ceylon Highlands
             </span>
-            <span className="w-6 sm:w-10 h-px bg-gradient-to-l from-transparent to-[#ca9f88]/90 shrink-0" />
+            <span className="w-1.5 h-1.5 bg-[#ca9f88] rounded-full shrink-0 opacity-75 hidden xs:inline-block" />
           </div>
           <h1
             style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 300 }}
