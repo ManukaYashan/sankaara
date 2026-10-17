@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Leaf, MapPin, Phone, Mail } from 'lucide-react';
+import { MapPin, Phone, Mail } from 'lucide-react';
+import SankaraLogo from './SankaraLogo';
 
 const InstagramIcon = ({ size = 14 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -28,9 +29,15 @@ export default function Footer() {
             <div>
               <Link
                 to="/"
-                className="inline-flex items-center gap-2.5 text-[#fbf9f2] hover:opacity-90 transition-opacity mb-4"
+                className="inline-flex items-center gap-3 text-[#fbf9f2] hover:opacity-90 transition-opacity mb-4 group"
               >
-                <Leaf size={18} className="text-[#ca9f88] shrink-0" />
+                <SankaraLogo
+                  size={26}
+                  className="shrink-0 transition-transform duration-300 group-hover:scale-105"
+                  frameColor="#ca9f88"
+                  darkSquareColor="#0e231d"
+                  accentSquareColor="#ca9f88"
+                />
                 <span
                   className="tracking-[0.25em] text-lg font-light uppercase"
                   style={{ fontFamily: "'Montserrat', sans-serif" }}
