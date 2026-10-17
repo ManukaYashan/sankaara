@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import SankaraLogo from './SankaraLogo';
 
 interface NavItem {
   name: string;
@@ -49,25 +50,16 @@ export default function Navbar() {
           to="/"
           className="flex items-center gap-3 text-[#132f27] hover:text-[#c86651] transition-colors duration-300 group shrink-0"
         >
-          <img
-            src="./images/logo/sankara_logo_ivory.jpg"
-            alt="S A N K Ā R A Emblem"
-            className="w-9 h-9 md:w-10 md:h-10 object-contain rounded-[2px] border border-[#ca9f88]/40 shadow-sm transition-transform duration-300 group-hover:scale-105"
+          <SankaraLogo
+            size={30}
+            className="shrink-0 transition-transform duration-300 group-hover:scale-105"
           />
-          <div className="flex flex-col">
-            <span
-              className="tracking-[0.28em] leading-none"
-              style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '0.9375rem', fontWeight: 400 }}
-            >
-              S A N K Ā R A
-            </span>
-            <span
-              className="text-[0.5625rem] tracking-[0.22em] uppercase text-[#ca9f88] font-medium mt-1"
-              style={{ fontFamily: "'Montserrat', sans-serif" }}
-            >
-              Boutique Hotel
-            </span>
-          </div>
+          <span
+            className="tracking-[0.28em] leading-none"
+            style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '0.9375rem', fontWeight: 400 }}
+          >
+            S A N K Ā R A
+          </span>
         </Link>
 
         {/* Desktop Nav */}
