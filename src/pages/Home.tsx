@@ -138,20 +138,29 @@ export default function Home() {
         </div>
 
         {/* Hero text */}
-        <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-5 pt-20 pb-28 max-w-4xl mx-auto">
-          <span className="sk-overline text-[#ca9f88] border border-[#ca9f88]/40 px-4 py-1.5 backdrop-blur-sm bg-black/10 mb-5 inline-block">
+        <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-6 pt-20 pb-28 max-w-4xl mx-auto w-full">
+          <span
+            className="inline-flex items-center gap-2 px-3.5 sm:px-5 py-1.5 mb-5
+                       bg-[#132f27]/90 backdrop-blur-md border border-[#ca9f88]/70
+                       text-[#e8c8b4] font-medium text-[0.5625rem] sm:text-[0.6875rem]
+                       tracking-[0.2em] sm:tracking-[0.24em] uppercase shadow-lg max-w-full text-center"
+            style={{ fontFamily: "'Montserrat', sans-serif" }}
+          >
             Valley Ridge Sanctuary · Ceylon Highlands
           </span>
           <h1
-            style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: '0.25em', fontWeight: 300 }}
-            className="text-[2.75rem] md:text-[4.5rem] leading-none uppercase text-white mb-4 drop-shadow-sm"
+            style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 300 }}
+            className="text-[1.85rem] xs:text-[2.25rem] sm:text-[3.25rem] md:text-[4.5rem]
+                       leading-none uppercase text-white mb-4 drop-shadow-md whitespace-nowrap
+                       tracking-[0.2em] sm:tracking-[0.26em] max-w-full"
           >
-            S A N K Ā R A
+            S&nbsp;A&nbsp;N&nbsp;K&nbsp;Ā&nbsp;R&nbsp;A
           </h1>
           <div className="w-14 h-px bg-[#ca9f88] my-4" />
           <p
-            style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: '0.32em', fontWeight: 300 }}
-            className="text-xs md:text-sm uppercase text-[#fbf9f2]/85 drop-shadow-sm tracking-[0.32em]"
+            style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 300 }}
+            className="text-[0.6875rem] sm:text-xs md:text-sm uppercase text-[#fbf9f2]/90
+                       drop-shadow-sm tracking-[0.26em] sm:tracking-[0.32em] whitespace-nowrap"
           >
             Creating Well Being
           </p>
