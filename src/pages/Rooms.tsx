@@ -1,6 +1,7 @@
 import { useState, useEffect, type FormEvent } from 'react';
 import { createPortal } from 'react-dom';
 import Icon from '../components/Icon';
+import LuxuryDatePicker from '../components/LuxuryDatePicker';
 
 interface Suite {
   id: string;
@@ -94,8 +95,8 @@ export default function Rooms() {
     name: '',
     email: '',
     phone: '',
-    checkIn: '2024-10-14',
-    checkOut: '2024-10-18',
+    checkIn: '14 OCT 2024',
+    checkOut: '18 OCT 2024',
     notes: '',
   });
 
@@ -361,28 +362,18 @@ export default function Rooms() {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="sk-label text-[#132f27] block mb-1">Check-In Date *</label>
-                  <input
-                    required
-                    type="date"
-                    value={formData.checkIn}
-                    onChange={(e) => setFormData({ ...formData, checkIn: e.target.value })}
-                    className="w-full border border-[rgba(19,47,39,0.15)] bg-[#f6f4ed] p-3 sk-body text-sm
-                               focus:border-[#c86651] outline-none transition-colors"
-                  />
-                </div>
-                <div>
-                  <label className="sk-label text-[#132f27] block mb-1">Check-Out Date *</label>
-                  <input
-                    required
-                    type="date"
-                    value={formData.checkOut}
-                    onChange={(e) => setFormData({ ...formData, checkOut: e.target.value })}
-                    className="w-full border border-[rgba(19,47,39,0.15)] bg-[#f6f4ed] p-3 sk-body text-sm
-                               focus:border-[#c86651] outline-none transition-colors"
-                  />
-                </div>
+                <LuxuryDatePicker
+                  label="Check-In Date *"
+                  value={formData.checkIn}
+                  onChange={(dateStr) => setFormData({ ...formData, checkIn: dateStr })}
+                  variant="form"
+                />
+                <LuxuryDatePicker
+                  label="Check-Out Date *"
+                  value={formData.checkOut}
+                  onChange={(dateStr) => setFormData({ ...formData, checkOut: dateStr })}
+                  variant="form"
+                />
               </div>
 
               <div>

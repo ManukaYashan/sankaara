@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Icon from '../components/Icon';
+import LuxuryDatePicker from '../components/LuxuryDatePicker';
 
 const suiteCards = [
   {
@@ -96,46 +97,10 @@ const reviews = [
   },
 ];
 
-const MONTH_NAMES = [
-  'JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE',
-  'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'
-];
-const MONTH_SHORT = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-
-function formatDateStr(date: Date): string {
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = MONTH_SHORT[date.getMonth()];
-  const year = date.getFullYear();
-  return `${day} ${month} ${year}`;
-}
-
-function parseDateStr(str: string): Date {
-  const parts = str.trim().split(/\s+/);
-  if (parts.length === 3) {
-    const day = parseInt(parts[0], 10);
-    const monthIndex = MONTH_SHORT.indexOf(parts[1].toUpperCase());
-    const year = parseInt(parts[2], 10);
-    if (!isNaN(day) && monthIndex !== -1 && !isNaN(year)) {
-      return new Date(year, monthIndex, day);
-    }
-  }
-  return new Date(2024, 9, 14);
-}
-
-function getCalendarDays(year: number, month: number) {
-  const firstDayIndex = new Date(year, month, 1).getDay();
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-  const days: { day: number; date: Date }[] = [];
-  for (let i = 1; i <= daysInMonth; i++) {
-    days.push({ day: i, date: new Date(year, month, i) });
-  }
-  return { firstDayIndex, days };
-}
-
 const guestOptions = [
-  { label: '02 Guests (1 Suite)', desc: 'Ideal for couples & mindful retreats' },
-  { label: '01 Guest (Solo Retreat)', desc: 'Dedicated solitary contemplation' },
-  { label: 'Whole Sanctuary Buyout', desc: 'Exclusive buyout of all 5 private pavilions' },
+  '02 Guests (1 Suite)',
+  '01 Guest (Solo Retreat)',
+  'Whole Sanctuary Buyout',
 ];
 
 export default function Home() {
@@ -143,14 +108,13 @@ export default function Home() {
   const [checkIn, setCheckIn] = useState('14 OCT 2024');
   const [checkOut, setCheckOut] = useState('18 OCT 2024');
   const [guests, setGuests] = useState('02 Guests (1 Suite)');
-  const [openPicker, setOpenPicker] = useState<'checkIn' | 'checkOut' | 'guests' | null>(null);
-  const [calendarMonth, setCalendarMonth] = useState(new Date(2024, 9, 1));
-  const barRef = useRef<HTMLDivElement>(null);
+  const [openGuests, setOpenGuests] = useState(false);
+  const guestsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (barRef.current && !barRef.current.contains(event.target as Node)) {
-        setOpenPicker(null);
+      if (guestsRef.current && !guestsRef.current.contains(event.target as Node)) {
+        setOpenGuests(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -158,90 +122,6 @@ export default function Home() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
-
-  const renderCalendar = (currentDateStr: string, onSelect: (newDateStr: string) => void) => {
-    const currentDate = parseDateStr(currentDateStr);
-    const year = calendarMonth.getFullYear();
-    const month = calendarMonth.getMonth();
-    const { firstDayIndex, days } = getCalendarDays(year, month);
-
-    return (
-      <div className="absolute top-full left-0 z-50 mt-2 w-72 sm:w-80 bg-[#fbf9f2] border border-[#ca9f88] shadow-2xl p-4 animate-fade-in text-left">
-        {/* Month Header */}
-        <div className="flex items-center justify-between mb-3 pb-2 border-b border-[rgba(19,47,39,0.1)]">
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              setCalendarMonth(new Date(year, month - 1, 1));
-            }}
-            className="w-7 h-7 flex items-center justify-center text-[#132f27] hover:bg-[#132f27] hover:text-[#fbf9f2] transition-colors"
-            aria-label="Previous month"
-          >
-            ‹
-          </button>
-          <span
-            className="sk-label text-[#132f27] font-semibold text-xs tracking-widest"
-            style={{ fontFamily: "'Montserrat', sans-serif" }}
-          >
-            {MONTH_NAMES[month]} {year}
-          </span>
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              setCalendarMonth(new Date(year, month + 1, 1));
-            }}
-            className="w-7 h-7 flex items-center justify-center text-[#132f27] hover:bg-[#132f27] hover:text-[#fbf9f2] transition-colors"
-            aria-label="Next month"
-          >
-            ›
-          </button>
-        </div>
-
-        {/* Weekday Row */}
-        <div className="grid grid-cols-7 text-center mb-1">
-          {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map((d) => (
-            <span key={d} className="sk-label text-[0.625rem] text-[#ca9f88] font-bold py-1">
-              {d}
-            </span>
-          ))}
-        </div>
-
-        {/* Days Grid */}
-        <div className="grid grid-cols-7 gap-1 text-center">
-          {Array.from({ length: firstDayIndex }).map((_, i) => (
-            <div key={`empty-${i}`} className="w-8 h-8" />
-          ))}
-          {days.map(({ day, date }) => {
-            const isSelected =
-              date.getFullYear() === currentDate.getFullYear() &&
-              date.getMonth() === currentDate.getMonth() &&
-              date.getDate() === currentDate.getDate();
-
-            return (
-              <button
-                key={day}
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onSelect(formatDateStr(date));
-                  setOpenPicker(null);
-                }}
-                className={`w-8 h-8 text-xs font-medium flex items-center justify-center transition-all ${isSelected
-                    ? 'bg-[#c86651] text-white font-semibold'
-                    : 'text-[#132f27] hover:bg-[#132f27] hover:text-[#fbf9f2]'
-                  }`}
-                style={{ fontFamily: "'Montserrat', sans-serif" }}
-              >
-                {day}
-              </button>
-            );
-          })}
-        </div>
-      </div>
-    );
-  };
 
   return (
     <div className="w-full">
@@ -280,7 +160,6 @@ export default function Home() {
         {/* Booking strip */}
         <div className="relative z-20 w-full px-4 md:px-12 lg:px-20 pb-10 md:pb-14">
           <div
-            ref={barRef}
             className="max-w-5xl mx-auto bg-[#fbf9f2] border border-[#ca9f88]
                        shadow-[0_24px_60px_-12px_rgba(19,47,39,0.35)] relative"
           >
@@ -289,62 +168,26 @@ export default function Home() {
               className="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-[rgba(19,47,39,0.12)]"
             >
               {/* Check-In */}
-              <div className="relative">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setCalendarMonth(parseDateStr(checkIn));
-                    setOpenPicker(openPicker === 'checkIn' ? null : 'checkIn');
-                  }}
-                  className="w-full text-left px-5 py-4 hover:bg-[#f6f4ed] transition-colors duration-200 focus:outline-none"
-                >
-                  <label className="sk-label text-[#727975] font-medium mb-1 block cursor-pointer">
-                    Check-In Date
-                  </label>
-                  <div className="flex items-center justify-between gap-2">
-                    <span
-                      className="text-[#132f27] text-[0.9375rem] font-medium tracking-wide"
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
-                    >
-                      {checkIn}
-                    </span>
-                    <Icon name="calendar_today" className="text-[#ca9f88] shrink-0" size={18} />
-                  </div>
-                </button>
-                {openPicker === 'checkIn' && renderCalendar(checkIn, setCheckIn)}
-              </div>
+              <LuxuryDatePicker
+                label="Check-In Date"
+                value={checkIn}
+                onChange={setCheckIn}
+                variant="bar"
+              />
 
               {/* Check-Out */}
-              <div className="relative">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setCalendarMonth(parseDateStr(checkOut));
-                    setOpenPicker(openPicker === 'checkOut' ? null : 'checkOut');
-                  }}
-                  className="w-full text-left px-5 py-4 hover:bg-[#f6f4ed] transition-colors duration-200 focus:outline-none"
-                >
-                  <label className="sk-label text-[#727975] font-medium mb-1 block cursor-pointer">
-                    Check-Out Date
-                  </label>
-                  <div className="flex items-center justify-between gap-2">
-                    <span
-                      className="text-[#132f27] text-[0.9375rem] font-medium tracking-wide"
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
-                    >
-                      {checkOut}
-                    </span>
-                    <Icon name="calendar_today" className="text-[#ca9f88] shrink-0" size={18} />
-                  </div>
-                </button>
-                {openPicker === 'checkOut' && renderCalendar(checkOut, setCheckOut)}
-              </div>
+              <LuxuryDatePicker
+                label="Check-Out Date"
+                value={checkOut}
+                onChange={setCheckOut}
+                variant="bar"
+              />
 
               {/* Guests Selector */}
-              <div className="relative">
+              <div ref={guestsRef} className="relative">
                 <button
                   type="button"
-                  onClick={() => setOpenPicker(openPicker === 'guests' ? null : 'guests')}
+                  onClick={() => setOpenGuests(!openGuests)}
                   className="w-full text-left px-5 py-4 hover:bg-[#f6f4ed] transition-colors duration-200 focus:outline-none"
                 >
                   <label className="sk-label text-[#727975] font-medium mb-1 block cursor-pointer">
@@ -358,42 +201,32 @@ export default function Home() {
                       {guests}
                     </span>
                     <Icon
-                      name={openPicker === 'guests' ? 'expand_less' : 'expand_more'}
+                      name={openGuests ? 'expand_less' : 'expand_more'}
                       className="text-[#ca9f88] shrink-0 transition-transform"
                       size={18}
                     />
                   </div>
                 </button>
 
-                {openPicker === 'guests' && (
-                  <div className="absolute top-full left-0 md:right-0 md:left-auto z-50 mt-2 w-72 sm:w-80 bg-[#fbf9f2] border border-[#ca9f88] shadow-2xl py-2 animate-fade-in text-left">
+                {openGuests && (
+                  <div className="absolute top-full left-0 md:right-0 md:left-auto z-50 mt-1.5 w-64 bg-[#fbf9f2] border border-[#ca9f88] shadow-xl py-1 animate-fade-in text-left">
                     {guestOptions.map((opt) => (
                       <button
-                        key={opt.label}
+                        key={opt}
                         type="button"
                         onClick={() => {
-                          setGuests(opt.label);
-                          setOpenPicker(null);
+                          setGuests(opt);
+                          setOpenGuests(false);
                         }}
-                        className={`w-full text-left px-4 py-3 transition-colors flex flex-col gap-0.5 group ${guests === opt.label
-                            ? 'bg-[#132f27] text-[#fbf9f2]'
-                            : 'hover:bg-[#132f27] hover:text-[#fbf9f2] text-[#132f27]'
-                          }`}
+                        className={`w-full text-left px-4 py-2.5 text-xs transition-colors flex items-center justify-between ${
+                          guests === opt
+                            ? 'bg-[#132f27] text-[#fbf9f2] font-semibold'
+                            : 'text-[#132f27] hover:bg-[#132f27] hover:text-[#fbf9f2]'
+                        }`}
+                        style={{ fontFamily: "'Montserrat', sans-serif" }}
                       >
-                        <span
-                          className="text-sm font-medium tracking-wide"
-                          style={{ fontFamily: "'Montserrat', sans-serif" }}
-                        >
-                          {opt.label}
-                        </span>
-                        <span
-                          className={`text-[0.75rem] ${guests === opt.label
-                              ? 'text-[#ca9f88]'
-                              : 'text-[#727975] group-hover:text-[#ca9f88]'
-                            }`}
-                        >
-                          {opt.desc}
-                        </span>
+                        <span className="tracking-wide">{opt}</span>
+                        {guests === opt && <span className="text-[#ca9f88] text-xs">✓</span>}
                       </button>
                     ))}
                   </div>
