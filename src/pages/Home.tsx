@@ -130,11 +130,11 @@ export default function Home() {
       <section className="relative min-h-[92vh] flex flex-col justify-between bg-[#132f27]" id="hero">
         <div className="absolute inset-0 z-0 overflow-hidden">
           <img
-            className="w-full h-full object-cover object-center brightness-[0.78]"
+            className="w-full h-full object-cover object-center brightness-[0.82] scale-[1.03] blur-[1.5px]"
             alt="SANKĀRA luxury sanctuary nestled in Ceylon highlands"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnKq1Dj4AnZ9EVZMblDZWzJOTKasTsOQoyDZCbYGiAxDt7bjMvQdln_sO0ngqXi8n9dFSEwzUAFIuUztDcmLtsnV0WSO6cif9UnHdkst8GwKYdqiYTbThAUHsacFydVI9H0M-pDERhUcW7ybm4o73AhV0zmk_rN8HnRVRkWf_wXQtvGDzT4aVfIpCRnjN2BQiJv2Zk2bs-uMO5Wnii-2XtqZq1rnGlK-x-yv9yUMryBACUgaXhcUGGYg"
+            src="./images/hero_ceylon_sanctuary.jpg"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#132f27]/45 via-[#132f27]/25 to-[#132f27]/85" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#132f27]/40 via-[#132f27]/20 to-[#132f27]/85" />
         </div>
 
         {/* Hero text */}
