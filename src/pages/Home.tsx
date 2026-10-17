@@ -134,20 +134,23 @@ export default function Home() {
             alt="SANKĀRA luxury sanctuary nestled in Ceylon highlands"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnKq1Dj4AnZ9EVZMblDZWzJOTKasTsOQoyDZCbYGiAxDt7bjMvQdln_sO0ngqXi8n9dFSEwzUAFIuUztDcmLtsnV0WSO6cif9UnHdkst8GwKYdqiYTbThAUHsacFydVI9H0M-pDERhUcW7ybm4o73AhV0zmk_rN8HnRVRkWf_wXQtvGDzT4aVfIpCRnjN2BQiJv2Zk2bs-uMO5Wnii-2XtqZq1rnGlK-x-yv9yUMryBACUgaXhcUGGYg"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#132f27]/30 via-transparent to-[#132f27]/85" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#132f27]/45 via-[#132f27]/25 to-[#132f27]/85" />
         </div>
 
         {/* Hero text */}
         <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-6 pt-20 pb-28 max-w-4xl mx-auto w-full">
-          <span
-            className="inline-flex items-center gap-2 px-3.5 sm:px-5 py-1.5 mb-5
-                       bg-[#132f27]/90 backdrop-blur-md border border-[#ca9f88]/70
-                       text-[#e8c8b4] font-medium text-[0.5625rem] sm:text-[0.6875rem]
-                       tracking-[0.2em] sm:tracking-[0.24em] uppercase shadow-lg max-w-full text-center"
-            style={{ fontFamily: "'Montserrat', sans-serif" }}
-          >
-            Valley Ridge Sanctuary · Ceylon Highlands
-          </span>
+          <div className="flex items-center justify-center gap-3 sm:gap-4 mb-5 max-w-full">
+            <span className="w-6 sm:w-10 h-px bg-gradient-to-r from-transparent to-[#ca9f88]/90 shrink-0" />
+            <span
+              className="text-[#fbf9f2] text-[0.6rem] sm:text-[0.72rem]
+                         tracking-[0.26em] sm:tracking-[0.32em] uppercase font-light
+                         drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] truncate"
+              style={{ fontFamily: "'Montserrat', sans-serif" }}
+            >
+              Valley Ridge Sanctuary · Ceylon Highlands
+            </span>
+            <span className="w-6 sm:w-10 h-px bg-gradient-to-l from-transparent to-[#ca9f88]/90 shrink-0" />
+          </div>
           <h1
             style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 300 }}
             className="text-[1.85rem] xs:text-[2.25rem] sm:text-[3.25rem] md:text-[4.5rem]
