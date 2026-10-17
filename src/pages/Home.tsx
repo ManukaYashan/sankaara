@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Icon from '../components/Icon';
 import LuxuryDatePicker from '../components/LuxuryDatePicker';
+import ReviewSlider from '../components/ReviewSlider';
 
 const suiteCards = [
   {
@@ -73,27 +74,6 @@ const experiences = [
     icon: 'hiking',
     img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBCg8NmtfXpBnsglbE6S1G54mWN0VT4bc59TJohQRR8TCCKtUDYdAL04VXp-7_wSe-8gXn6kXRJgZBkVfMcOhiFFsHRNlETrAcOwiG9zdifjiYpG0OO_mgUhQfNTcfUiS2KOl3YaEZ0YevmvFkKdZX8fQb2OgZaAQaOaZovG7dyddUDzc8z2_iUMQw3S6UmjECDFwWKDnShvLAs5rw24qi7kzWUOxjm7K4xxy219UBtuM9ZZ5Vm2eD1dw',
     alt: 'Tea terroir walking trails in morning mist',
-  },
-];
-
-const reviews = [
-  {
-    quote: '"An architectural miracle floating above the clouds. The silence here is not emptiness, but a profound fullness that restored my spirit."',
-    name: 'Elena Rostova',
-    location: 'Geneva, Switzerland',
-    suite: 'The Master Sanctuary',
-  },
-  {
-    quote: '"From the sunset botanical teas on the veranda to the morning mist rolling past our floor-to-ceiling glass, Sankāra redefined hospitality for us."',
-    name: 'Marcus & Priya Vance',
-    location: 'London, United Kingdom',
-    suite: 'Forest View Suite',
-  },
-  {
-    quote: '"Waking up to the calls of endemic mountain birds, breathing in wild cinnamon and wet stone. Truly the most transcendent retreat in Asia."',
-    name: 'Kenji Takahashi',
-    location: 'Kyoto, Japan',
-    suite: 'Courtyard Garden Room',
   },
 ];
 
@@ -453,26 +433,7 @@ export default function Home() {
             <p className="sk-body">Whispers from those who traversed the cloud line to dwell in sacred stillness.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {reviews.map((r) => (
-              <div key={r.name} className="sk-card p-8 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-1 mb-6">
-                    {[...Array(5)].map((_, i) => (
-                      <Icon key={i} name="star" className="text-[#ca9f88]" size={14} />
-                    ))}
-                  </div>
-                  <p className="sk-body italic text-[#132f27] mb-6">{r.quote}</p>
-                </div>
-                <div className="pt-4 border-t border-[rgba(19,47,39,0.08)]">
-                  <p className="sk-card-title text-[#132f27] mb-1">{r.name}</p>
-                  <p className="sk-label">
-                    {r.location} · <span className="text-[#ca9f88]">{r.suite}</span>
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <ReviewSlider />
         </div>
       </section>
 
