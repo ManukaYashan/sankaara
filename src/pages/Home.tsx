@@ -212,11 +212,10 @@ export default function Home() {
                           setGuests(opt);
                           setOpenGuests(false);
                         }}
-                        className={`w-full text-left px-4 py-2.5 text-xs transition-colors flex items-center justify-between ${
-                          guests === opt
+                        className={`w-full text-left px-4 py-2.5 text-xs transition-colors flex items-center justify-between ${guests === opt
                             ? 'bg-[#132f27] text-[#fbf9f2] font-semibold'
                             : 'text-[#132f27] hover:bg-[#132f27] hover:text-[#fbf9f2]'
-                        }`}
+                          }`}
                         style={{ fontFamily: "'Montserrat', sans-serif" }}
                       >
                         <span className="tracking-wide">{opt}</span>
