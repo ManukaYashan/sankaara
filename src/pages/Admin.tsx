@@ -470,7 +470,7 @@ export default function Admin() {
               {/* Controls bar: Filters + Search */}
               <div className="bg-white p-4 border border-[rgba(19,47,39,0.08)] shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
                 {/* Status Filter Pills */}
-                <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto whitespace-nowrap scrollbar-none text-xs -mx-2 px-2 sm:mx-0 sm:px-0">
+                <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs">
                   <button
                     onClick={() => setBookingFilter('all')}
                     className={`px-3 py-1.5 border transition-all cursor-pointer shrink-0 ${
