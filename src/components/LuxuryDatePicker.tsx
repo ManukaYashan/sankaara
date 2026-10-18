@@ -52,6 +52,8 @@ interface LuxuryDatePickerProps {
   variant?: 'bar' | 'form';
   className?: string;
   required?: boolean;
+  disabledDates?: string[];
+  minDate?: Date;
 }
 
 export default function LuxuryDatePicker({
@@ -60,6 +62,8 @@ export default function LuxuryDatePicker({
   onChange,
   variant = 'form',
   className = '',
+  disabledDates = [],
+  minDate,
 }: LuxuryDatePickerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -194,6 +198,31 @@ export default function LuxuryDatePicker({
                 date.getMonth() === currentDate.getMonth() &&
                 date.getDate() === currentDate.getDate();
 
+              const yearStr = date.getFullYear();
+              const monthStr = String(date.getMonth() + 1).padStart(2, '0');
+              const dayStr = String(date.getDate()).padStart(2, '0');
+              const isoKey = `${yearStr}-${monthStr}-${dayStr}`;
+
+              // Check if date is before minDate (if provided)
+              const isPast = minDate ? date < new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate()) : false;
+              const isBlocked = disabledDates.includes(isoKey);
+              const isDisabled = isPast || isBlocked;
+
+              if (isDisabled) {
+                return (
+                  <button
+                    key={day}
+                    type="button"
+                    disabled
+                    title={isBlocked ? 'Booked / Unavailable' : 'Past date'}
+                    className="w-8 h-8 text-xs font-medium flex items-center justify-center line-through text-[#a2a9a5] bg-[#132f27]/5 cursor-not-allowed opacity-40 select-none"
+                    style={{ fontFamily: "'Montserrat', sans-serif" }}
+                  >
+                    {day}
+                  </button>
+                );
+              }
+
               return (
                 <button
                   key={day}
@@ -214,6 +243,13 @@ export default function LuxuryDatePicker({
               );
             })}
           </div>
+
+          {disabledDates.length > 0 && (
+            <div className="mt-2.5 pt-2 border-t border-[rgba(19,47,39,0.08)] flex items-center justify-center gap-1.5 text-[0.65rem] text-[#727975]">
+              <span className="inline-block w-2 h-2 rounded-full bg-[#132f27]/20 line-through" />
+              <span>Unavailable / Reserved</span>
+            </div>
+          )}
         </div>
       )}
     </div>

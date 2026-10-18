@@ -1,7 +1,14 @@
 import { useState, useEffect, type FormEvent } from 'react';
 import { createPortal } from 'react-dom';
 import Icon from '../components/Icon';
-import LuxuryDatePicker from '../components/LuxuryDatePicker';
+import LuxuryDatePicker, { formatDateStr, parseDateStr } from '../components/LuxuryDatePicker';
+import {
+  getRoomMedia,
+  getBlockedDates,
+  createBooking,
+  toISODateString,
+} from '../services/bookingService';
+import type { RoomMediaRecord } from '../lib/supabase';
 
 interface Suite {
   id: string;
@@ -18,7 +25,7 @@ interface Suite {
   thumbnails: { src: string; alt: string }[];
 }
 
-const suites: Suite[] = [
+const defaultSuites: Suite[] = [
   {
     id: 'suite-01', number: '01', title: 'Forest View Suite', levelBadge: 'CANOPY LEVEL',
     subtitle: '75 SQM / 807 SQFT · King Bed · Max 2 Adults · Valley Facing',
@@ -87,18 +94,74 @@ const suites: Suite[] = [
 ];
 
 export default function Rooms() {
+  const [suites, setSuites] = useState<Suite[]>(defaultSuites);
   const [bookingSuite, setBookingSuite] = useState<Suite | null>(null);
+  const [suiteBlockedDates, setSuiteBlockedDates] = useState<string[]>([]);
   const [activeFilter, setActiveFilter] = useState('suite-all');
   const [toast, setToast] = useState<{ title: string; message: string } | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Default dates: tomorrow to +4 days
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const inFourDays = new Date();
+  inFourDays.setDate(inFourDays.getDate() + 5);
 
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    checkIn: '14 OCT 2024',
-    checkOut: '18 OCT 2024',
+    checkIn: formatDateStr(tomorrow),
+    checkOut: formatDateStr(inFourDays),
     notes: '',
   });
+
+  // Load real-time room photography from Supabase on mount
+  useEffect(() => {
+    async function loadDynamicMedia() {
+      try {
+        const mediaMap: Record<string, RoomMediaRecord> = await getRoomMedia();
+        if (Object.keys(mediaMap).length > 0) {
+          setSuites((prev) =>
+            prev.map((s) => {
+              const liveMedia = mediaMap[s.id];
+              if (!liveMedia) return s;
+              return {
+                ...s,
+                mainImage: {
+                  src: liveMedia.main_image || s.mainImage.src,
+                  alt: s.mainImage.alt,
+                },
+                thumbnails: [
+                  liveMedia.thumbnail_1
+                    ? { src: liveMedia.thumbnail_1, alt: s.thumbnails[0]?.alt || s.title }
+                    : s.thumbnails[0],
+                  liveMedia.thumbnail_2
+                    ? { src: liveMedia.thumbnail_2, alt: s.thumbnails[1]?.alt || s.title }
+                    : s.thumbnails[1],
+                ].filter(Boolean),
+              };
+            })
+          );
+        }
+      } catch (err) {
+        console.error('Could not load dynamic room media:', err);
+      }
+    }
+    loadDynamicMedia();
+  }, []);
+
+  // When opening booking modal, fetch blocked dates for this suite
+  const handleOpenBooking = async (suite: Suite) => {
+    setBookingSuite(suite);
+    try {
+      const blocked = await getBlockedDates(suite.id);
+      setSuiteBlockedDates(blocked);
+    } catch (err) {
+      console.error('Could not fetch blocked dates:', err);
+      setSuiteBlockedDates([]);
+    }
+  };
 
   useEffect(() => {
     if (bookingSuite) {
@@ -113,27 +176,67 @@ export default function Rooms() {
 
   useEffect(() => {
     if (toast) {
-      const timer = setTimeout(() => setToast(null), 6000);
+      const timer = setTimeout(() => setToast(null), 7000);
       return () => clearTimeout(timer);
     }
   }, [toast]);
 
-  const handleBookingSubmit = (e: FormEvent) => {
+  const handleBookingSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const currentSuite = bookingSuite;
-    setBookingSuite(null);
-    setToast({
-      title: 'Reservation Request Received',
-      message: `Thank you, ${formData.name || 'Valued Guest'}. Your request for ${currentSuite?.title} has been logged. Our Master Butler desk will review your dates (${formData.checkIn} — ${formData.checkOut}) and contact you via ${formData.email || 'email'} / ${formData.phone || 'phone'} within 12 hours.`,
-    });
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      checkIn: '2024-10-14',
-      checkOut: '2024-10-18',
-      notes: '',
-    });
+    if (!bookingSuite) return;
+
+    const checkInDate = parseDateStr(formData.checkIn);
+    const checkOutDate = parseDateStr(formData.checkOut);
+
+    if (checkOutDate <= checkInDate) {
+      alert('Check-out date must be after check-in date.');
+      return;
+    }
+
+    const checkInIso = toISODateString(checkInDate);
+    const checkOutIso = toISODateString(checkOutDate);
+
+    // Calculate nights
+    const diffTime = Math.abs(checkOutDate.getTime() - checkInDate.getTime());
+    const nights = Math.max(1, Math.ceil(diffTime / (1000 * 60 * 60 * 24)));
+    const totalPrice = nights * bookingSuite.rate;
+
+    setIsSubmitting(true);
+    try {
+      // 1. Save to Supabase bookings table
+      await createBooking({
+        suite_id: bookingSuite.id,
+        suite_title: bookingSuite.title,
+        guest_name: formData.name.trim(),
+        guest_email: formData.email.trim(),
+        guest_phone: formData.phone.trim(),
+        check_in: checkInIso,
+        check_out: checkOutIso,
+        total_price: totalPrice,
+        notes: formData.notes.trim() || undefined,
+      });
+
+      const currentSuite = bookingSuite;
+      setBookingSuite(null);
+      setToast({
+        title: 'Reservation Request Logged',
+        message: `Thank you, ${formData.name || 'Valued Guest'}. Your reservation for ${currentSuite.title} (${formData.checkIn} — ${formData.checkOut}, ${nights} nights) has been received. Our Master Butler desk will review your details and contact you via ${formData.email} / ${formData.phone} shortly.`,
+      });
+
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        checkIn: formatDateStr(tomorrow),
+        checkOut: formatDateStr(inFourDays),
+        notes: '',
+      });
+    } catch (err: any) {
+      console.error('Error logging booking:', err);
+      alert('We encountered an error processing your reservation request. Please try again or contact the concierge.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const scrollToSuite = (id: string) => {
@@ -245,9 +348,10 @@ export default function Rooms() {
                   <p className="sk-body text-sm text-[#ca9f88] mb-6">{suite.rateDetails}</p>
                   <div className="pt-2">
                     <button
+                      id={`book-btn-${suite.id}`}
                       type="button"
-                      onClick={() => setBookingSuite(suite)}
-                      className="sk-btn-primary px-8 justify-center"
+                      onClick={() => handleOpenBooking(suite)}
+                      className="sk-btn-primary px-8 justify-center cursor-pointer"
                     >
                       Book Suite
                     </button>
@@ -324,6 +428,7 @@ export default function Rooms() {
               <div>
                 <label className="sk-label text-[#132f27] block mb-1">Full Guest Name *</label>
                 <input
+                  id="guest-name-input"
                   required
                   placeholder="e.g. Alistair Sterling"
                   type="text"
@@ -338,6 +443,7 @@ export default function Rooms() {
                 <div>
                   <label className="sk-label text-[#132f27] block mb-1">Email Address *</label>
                   <input
+                    id="guest-email-input"
                     required
                     placeholder="guest@residence.com"
                     type="email"
@@ -350,6 +456,7 @@ export default function Rooms() {
                 <div>
                   <label className="sk-label text-[#132f27] block mb-1">Phone / WhatsApp *</label>
                   <input
+                    id="guest-phone-input"
                     required
                     placeholder="+1 (555) 019-2834"
                     type="tel"
@@ -367,18 +474,30 @@ export default function Rooms() {
                   value={formData.checkIn}
                   onChange={(dateStr) => setFormData({ ...formData, checkIn: dateStr })}
                   variant="form"
+                  disabledDates={suiteBlockedDates}
+                  minDate={new Date()}
                 />
                 <LuxuryDatePicker
                   label="Check-Out Date *"
                   value={formData.checkOut}
                   onChange={(dateStr) => setFormData({ ...formData, checkOut: dateStr })}
                   variant="form"
+                  disabledDates={suiteBlockedDates}
+                  minDate={parseDateStr(formData.checkIn)}
                 />
               </div>
+
+              {suiteBlockedDates.length > 0 && (
+                <div className="p-2.5 bg-[#ca9f88]/10 border border-[#ca9f88]/30 text-[0.7rem] text-[#132f27] flex items-center gap-2">
+                  <Icon name="event_busy" size={14} className="text-[#c86651] shrink-0" />
+                  <span>Some dates for this suite are reserved. Reserved dates are strikethrough in the calendar.</span>
+                </div>
+              )}
 
               <div>
                 <label className="sk-label text-[#132f27] block mb-1">Special Inquiries or Dietary Notes</label>
                 <textarea
+                  id="guest-notes-input"
                   rows={2}
                   placeholder="Special requests, dietary requirements, transit assistance..."
                   value={formData.notes}
@@ -388,8 +507,13 @@ export default function Rooms() {
                 />
               </div>
 
-              <button type="submit" className="sk-btn-primary w-full justify-center mt-3">
-                Confirm Sanctuary Request
+              <button
+                id="guest-submit-btn"
+                type="submit"
+                disabled={isSubmitting}
+                className="sk-btn-primary w-full justify-center mt-3 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+              >
+                {isSubmitting ? 'Logging Sanctuary Request...' : 'Confirm Sanctuary Request'}
               </button>
             </form>
           </div>

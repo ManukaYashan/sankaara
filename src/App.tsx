@@ -7,6 +7,7 @@ import Rooms from './pages/Rooms';
 import Gallery from './pages/Gallery';
 import Location from './pages/Location';
 import Policies from './pages/Policies';
+import Admin from './pages/Admin';
 
 function AppContent() {
   const location = useLocation();
@@ -21,6 +22,7 @@ function AppContent() {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/location" element={<Location />} />
           <Route path="/policies" element={<Policies />} />
+          <Route path="/admin" element={<Admin />} />
           {/* Fallback route */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
