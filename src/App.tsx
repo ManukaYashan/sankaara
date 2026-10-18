@@ -11,11 +11,12 @@ import Admin from './pages/Admin';
 
 function AppContent() {
   const location = useLocation();
+  const isAdmin = location.pathname.startsWith('/admin');
 
   return (
     <div className="min-h-screen flex flex-col bg-surface-container-low text-on-surface">
-      <Navbar />
-      <main key={location.pathname} className="flex-1 sk-page-transition">
+      {!isAdmin && <Navbar />}
+      <main key={location.pathname} className={`flex-1 ${!isAdmin ? 'sk-page-transition' : ''}`}>
         <Routes location={location}>
           <Route path="/" element={<Home />} />
           <Route path="/rooms" element={<Rooms />} />
@@ -27,7 +28,7 @@ function AppContent() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
-      <Footer />
+      {!isAdmin && <Footer />}
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { useState, useEffect, type FormEvent } from 'react';
 import { createPortal } from 'react-dom';
+import { Link } from 'react-router-dom';
 import Icon from '../components/Icon';
 import LuxuryDatePicker, { parseDateStr, formatDateStr } from '../components/LuxuryDatePicker';
 import {
@@ -256,10 +257,25 @@ export default function Admin() {
   // PIN PROTECTION SCREEN
   if (!isAuthenticated) {
     return (
-      <main className="min-h-[80vh] flex items-center justify-center p-4 bg-[#f6f4ed]">
-        <div className="bg-[#fbf9f2] max-w-md w-full p-8 md:p-10 border border-[#ca9f88] shadow-2xl">
+      <main className="min-h-screen flex flex-col justify-between bg-[#132f27] text-[#fbf9f2] p-4 sm:p-6 md:p-8">
+        {/* Top bar with back to site */}
+        <div className="max-w-md w-full mx-auto flex items-center justify-between pt-2">
+          <Link
+            to="/"
+            className="text-xs text-[#ca9f88] hover:text-white flex items-center gap-1.5 transition-colors"
+          >
+            <Icon name="arrow_back" size={14} />
+            <span>Back to Sanctuary</span>
+          </Link>
+          <span className="text-[0.65rem] uppercase tracking-[0.25em] text-[#ca9f88]/70">
+            Internal Operations
+          </span>
+        </div>
+
+        {/* Center Auth Card */}
+        <div className="bg-[#fbf9f2] text-[#132f27] max-w-md w-full mx-auto p-6 sm:p-10 border border-[#ca9f88] shadow-2xl my-8">
           <div className="text-center mb-8">
-            <span className="sk-overline text-[#ca9f88] block mb-2 tracking-[0.3em]">
+            <span className="sk-overline text-[#ca9f88] block mb-2 tracking-[0.3em] text-[0.68rem]">
               SANCTUARY OPERATIONS
             </span>
             <h1
@@ -303,6 +319,13 @@ export default function Admin() {
             </span>
           </div>
         </div>
+
+        {/* Footer Note */}
+        <div className="max-w-md w-full mx-auto text-center pb-2">
+          <p className="text-[0.7rem] text-[#ca9f88]/60">
+            SANKĀRA Highlands Retreat · Restricted Access
+          </p>
+        </div>
       </main>
     );
   }
@@ -321,7 +344,7 @@ export default function Admin() {
           </div>
           <button
             onClick={() => setToastMessage(null)}
-            className="text-[#ca9f88] hover:text-white transition-colors text-sm p-1 leading-none"
+            className="text-[#ca9f88] hover:text-white transition-colors text-sm p-1 leading-none cursor-pointer"
             aria-label="Dismiss toast"
           >
             ✕
@@ -331,73 +354,93 @@ export default function Admin() {
       )}
 
       {/* Header Bar */}
-      <section className="bg-[#fbf9f2] border-b border-[rgba(19,47,39,0.1)] py-8 px-5 md:px-12">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-2 mb-1">
-              <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
-              <span className="sk-overline text-[#ca9f88] text-[0.7rem] tracking-[0.25em]">
-                Live Sanctuary Database Connected
-              </span>
+      <section className="bg-[#fbf9f2] border-b border-[rgba(19,47,39,0.1)] pt-6 pb-4 sm:pt-8 sm:pb-6 px-4 sm:px-8 md:px-12">
+        <div className="max-w-7xl mx-auto space-y-4">
+          {/* Top navigation row: Brand & Return to public site */}
+          <div className="flex items-center justify-between pb-3 border-b border-[rgba(19,47,39,0.06)]">
+            <Link
+              to="/"
+              className="text-xs text-[#ca9f88] hover:text-[#132f27] flex items-center gap-1.5 transition-colors font-medium group"
+            >
+              <Icon name="arrow_back" size={14} className="transition-transform group-hover:-translate-x-0.5" />
+              <span>Back to Sanctuary Website</span>
+            </Link>
+            <span className="text-[0.62rem] sm:text-[0.7rem] uppercase tracking-[0.25em] text-[#727975] font-light">
+              Management Portal
+            </span>
+          </div>
+
+          {/* Main header row: Title + Actions */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
+                <span className="sk-overline text-[#ca9f88] text-[0.65rem] sm:text-[0.7rem] tracking-[0.22em]">
+                  Live Sanctuary Database Connected
+                </span>
+              </div>
+              <h1
+                className="text-xl sm:text-2xl md:text-3xl font-light text-[#132f27] tracking-wider"
+                style={{ fontFamily: "'Montserrat', sans-serif" }}
+              >
+                Manager Control Center
+              </h1>
             </div>
-            <h1
-              className="text-2xl md:text-3xl font-light text-[#132f27] tracking-wider"
-              style={{ fontFamily: "'Montserrat', sans-serif" }}
-            >
-              Manager Control Center
-            </h1>
+
+            <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
+              <button
+                onClick={loadAllData}
+                disabled={loading}
+                className="flex-1 sm:flex-initial px-3.5 py-2 text-xs border border-[rgba(19,47,39,0.2)] bg-white text-[#132f27] hover:border-[#ca9f88] transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+              >
+                <Icon name="refresh" size={14} className={loading ? 'animate-spin' : ''} />
+                <span>Refresh Data</span>
+              </button>
+              <button
+                onClick={handleLogout}
+                className="px-3.5 py-2 text-xs border border-[#c86651]/40 text-[#c86651] hover:bg-[#c86651] hover:text-white transition-colors cursor-pointer"
+              >
+                Lock / Exit
+              </button>
+            </div>
           </div>
 
-          <div className="flex items-center gap-4">
+          {/* Tab Switcher - Smooth scrollable on mobile */}
+          <div className="pt-2 flex items-center gap-4 sm:gap-8 border-b border-[rgba(19,47,39,0.08)] overflow-x-auto whitespace-nowrap scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0">
             <button
-              onClick={loadAllData}
-              disabled={loading}
-              className="px-4 py-2 text-xs border border-[rgba(19,47,39,0.2)] bg-white text-[#132f27] hover:border-[#ca9f88] transition-colors flex items-center gap-2"
+              onClick={() => setActiveTab('bookings')}
+              className={`pb-3 text-xs uppercase tracking-[0.16em] sm:tracking-[0.2em] font-medium transition-colors border-b-2 shrink-0 cursor-pointer ${
+                activeTab === 'bookings'
+                  ? 'border-[#c86651] text-[#132f27]'
+                  : 'border-transparent text-[#727975] hover:text-[#132f27]'
+              }`}
             >
-              <Icon name="refresh" size={14} className={loading ? 'animate-spin' : ''} />
-              Refresh Data
+              <span className="sm:hidden">Inquiries ({bookings.length})</span>
+              <span className="hidden sm:inline">Reservation Inquiries ({bookings.length})</span>
             </button>
             <button
-              onClick={handleLogout}
-              className="px-4 py-2 text-xs border border-[#c86651]/40 text-[#c86651] hover:bg-[#c86651] hover:text-white transition-colors"
+              onClick={() => setActiveTab('dates')}
+              className={`pb-3 text-xs uppercase tracking-[0.16em] sm:tracking-[0.2em] font-medium transition-colors border-b-2 shrink-0 cursor-pointer ${
+                activeTab === 'dates'
+                  ? 'border-[#c86651] text-[#132f27]'
+                  : 'border-transparent text-[#727975] hover:text-[#132f27]'
+              }`}
             >
-              Lock / Exit
+              <span className="sm:hidden">Calendar ({blockedList.length})</span>
+              <span className="hidden sm:inline">Calendar Date Blocker ({blockedList.length} blocked)</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('photos')}
+              className={`pb-3 text-xs uppercase tracking-[0.16em] sm:tracking-[0.2em] font-medium transition-colors border-b-2 shrink-0 cursor-pointer ${
+                activeTab === 'photos'
+                  ? 'border-[#c86651] text-[#132f27]'
+                  : 'border-transparent text-[#727975] hover:text-[#132f27]'
+              }`}
+            >
+              <span className="sm:hidden">Suite Photos</span>
+              <span className="hidden sm:inline">Room Photos Editor</span>
             </button>
           </div>
-        </div>
-
-        {/* Tab Switcher */}
-        <div className="max-w-7xl mx-auto mt-8 flex items-center gap-8 border-b border-[rgba(19,47,39,0.08)] overflow-x-auto">
-          <button
-            onClick={() => setActiveTab('bookings')}
-            className={`pb-3 text-xs uppercase tracking-[0.2em] font-medium transition-colors border-b-2 ${
-              activeTab === 'bookings'
-                ? 'border-[#c86651] text-[#132f27]'
-                : 'border-transparent text-[#727975] hover:text-[#132f27]'
-            }`}
-          >
-            Reservation Inquiries ({bookings.length})
-          </button>
-          <button
-            onClick={() => setActiveTab('dates')}
-            className={`pb-3 text-xs uppercase tracking-[0.2em] font-medium transition-colors border-b-2 ${
-              activeTab === 'dates'
-                ? 'border-[#c86651] text-[#132f27]'
-                : 'border-transparent text-[#727975] hover:text-[#132f27]'
-            }`}
-          >
-            Calendar Date Blocker ({blockedList.length} blocked)
-          </button>
-          <button
-            onClick={() => setActiveTab('photos')}
-            className={`pb-3 text-xs uppercase tracking-[0.2em] font-medium transition-colors border-b-2 ${
-              activeTab === 'photos'
-                ? 'border-[#c86651] text-[#132f27]'
-                : 'border-transparent text-[#727975] hover:text-[#132f27]'
-            }`}
-          >
-            Room Photos Editor
-          </button>
         </div>
       </section>
 
@@ -427,10 +470,10 @@ export default function Admin() {
               {/* Controls bar: Filters + Search */}
               <div className="bg-white p-4 border border-[rgba(19,47,39,0.08)] shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
                 {/* Status Filter Pills */}
-                <div className="flex items-center gap-2 overflow-x-auto text-xs">
+                <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs">
                   <button
                     onClick={() => setBookingFilter('all')}
-                    className={`px-3 py-1.5 border transition-all ${
+                    className={`px-3 py-1.5 border transition-all cursor-pointer shrink-0 ${
                       bookingFilter === 'all'
                         ? 'bg-[#132f27] text-white border-[#132f27]'
                         : 'bg-[#f6f4ed] text-[#727975] border-transparent hover:border-[#ca9f88]'
@@ -440,7 +483,7 @@ export default function Admin() {
                   </button>
                   <button
                     onClick={() => setBookingFilter('pending')}
-                    className={`px-3 py-1.5 border transition-all flex items-center gap-1.5 ${
+                    className={`px-3 py-1.5 border transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${
                       bookingFilter === 'pending'
                         ? 'bg-[#ca9f88] text-white border-[#ca9f88]'
                         : 'bg-[#f6f4ed] text-[#132f27] border-transparent hover:border-[#ca9f88]'
@@ -451,7 +494,7 @@ export default function Admin() {
                   </button>
                   <button
                     onClick={() => setBookingFilter('confirmed')}
-                    className={`px-3 py-1.5 border transition-all flex items-center gap-1.5 ${
+                    className={`px-3 py-1.5 border transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${
                       bookingFilter === 'confirmed'
                         ? 'bg-emerald-700 text-white border-emerald-700'
                         : 'bg-[#f6f4ed] text-[#132f27] border-transparent hover:border-emerald-300'
@@ -462,7 +505,7 @@ export default function Admin() {
                   </button>
                   <button
                     onClick={() => setBookingFilter('declined')}
-                    className={`px-3 py-1.5 border transition-all ${
+                    className={`px-3 py-1.5 border transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${
                       bookingFilter === 'declined'
                         ? 'bg-rose-700 text-white border-rose-700'
                         : 'bg-[#f6f4ed] text-[#727975] border-transparent hover:border-rose-300'
@@ -485,7 +528,7 @@ export default function Admin() {
                   {bookingSearch && (
                     <button
                       onClick={() => setBookingSearch('')}
-                      className="absolute right-2.5 top-2.5 text-[#727975] hover:text-[#132f27] text-xs"
+                      className="absolute right-2.5 top-2.5 text-[#727975] hover:text-[#132f27] text-xs cursor-pointer"
                     >
                       ✕
                     </button>
@@ -493,138 +536,251 @@ export default function Admin() {
                 </div>
               </div>
 
-              {/* Data Table */}
+              {/* Data View */}
               {filteredBookings.length === 0 ? (
                 <div className="bg-white p-12 text-center border border-[rgba(19,47,39,0.08)]">
                   <Icon name="inbox" className="mx-auto text-[#ca9f88] mb-3" size={28} />
                   <p className="text-sm text-[#727975]">No matching reservation requests found.</p>
                 </div>
               ) : (
-                <div className="bg-white border border-[rgba(19,47,39,0.08)] shadow-sm overflow-hidden">
-                  <div className="overflow-x-auto max-h-[600px] overflow-y-auto">
-                    <table className="w-full text-left border-collapse text-xs">
-                      <thead className="bg-[#fbf9f2] border-b border-[rgba(19,47,39,0.1)] sticky top-0 z-10 text-[0.68rem] uppercase tracking-wider text-[#727975]">
-                        <tr>
-                          <th className="py-3 px-4 font-semibold">Guest & Contact</th>
-                          <th className="py-3 px-4 font-semibold">Suite</th>
-                          <th className="py-3 px-4 font-semibold">Stay Dates</th>
-                          <th className="py-3 px-4 font-semibold">Total</th>
-                          <th className="py-3 px-4 font-semibold text-center">Status</th>
-                          <th className="py-3 px-4 font-semibold text-center">Notes</th>
-                          <th className="py-3 px-4 font-semibold text-right">Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-[rgba(19,47,39,0.06)]">
-                        {filteredBookings.map((b) => {
-                          const isPending = b.status === 'pending';
-                          const isConfirmed = b.status === 'confirmed';
+                <>
+                  {/* MOBILE VIEW: High-Usability Touch Cards */}
+                  <div className="block md:hidden space-y-3">
+                    {filteredBookings.map((b) => {
+                      const isPending = b.status === 'pending';
+                      const isConfirmed = b.status === 'confirmed';
 
-                          return (
-                            <tr key={b.id} className="hover:bg-[#f6f4ed]/60 transition-colors">
-                              {/* Guest */}
-                              <td className="py-3 px-4">
-                                <div className="font-semibold text-[#132f27] text-sm">{b.guest_name}</div>
-                                <div className="flex items-center gap-2 mt-0.5">
-                                  <a href={`mailto:${b.guest_email}`} className="text-[#c86651] hover:underline">
-                                    {b.guest_email}
-                                  </a>
-                                  {b.guest_phone && (
-                                    <>
-                                      <span className="text-[#d1d5db]">·</span>
-                                      <span className="text-[#727975]">{b.guest_phone}</span>
-                                    </>
-                                  )}
-                                </div>
-                              </td>
+                      return (
+                        <div key={b.id} className="bg-white p-4 border border-[rgba(19,47,39,0.1)] shadow-sm space-y-3">
+                          {/* Top: Guest Name + Status Pill */}
+                          <div className="flex items-start justify-between gap-2">
+                            <div>
+                              <div className="font-semibold text-sm text-[#132f27]">{b.guest_name}</div>
+                              <div className="text-[0.7rem] text-[#ca9f88] font-medium uppercase tracking-wider mt-0.5">
+                                {b.suite_title}
+                              </div>
+                            </div>
+                            <span
+                              className={`shrink-0 px-2.5 py-0.5 text-[0.62rem] uppercase tracking-wider font-semibold ${
+                                isPending
+                                  ? 'bg-amber-50 text-amber-900 border border-amber-300'
+                                  : isConfirmed
+                                  ? 'bg-emerald-50 text-emerald-900 border border-emerald-300'
+                                  : 'bg-rose-50 text-rose-900 border border-rose-300'
+                              }`}
+                            >
+                              {b.status}
+                            </span>
+                          </div>
 
-                              {/* Suite */}
-                              <td className="py-3 px-4">
-                                <span className="font-medium text-[#132f27] block">{b.suite_title}</span>
-                                <span className="text-[0.65rem] text-[#727975] uppercase tracking-wider">{b.suite_id}</span>
-                              </td>
+                          {/* Dates & Price Strip */}
+                          <div className="bg-[#fbf9f2] p-2.5 border border-[rgba(19,47,39,0.06)] flex items-center justify-between text-xs">
+                            <div className="flex items-center gap-1.5 text-[#132f27]">
+                              <Icon name="calendar" size={13} className="text-[#ca9f88]" />
+                              <span className="font-medium" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+                                {b.check_in} → {b.check_out}
+                              </span>
+                            </div>
+                            <span className="font-semibold text-[#132f27]">
+                              ${Number(b.total_price || 0).toLocaleString()}
+                            </span>
+                          </div>
 
-                              {/* Dates */}
-                              <td className="py-3 px-4 whitespace-nowrap">
-                                <span className="font-medium text-[#132f27]" style={{ fontFamily: "'Montserrat', sans-serif" }}>
-                                  {b.check_in} → {b.check_out}
-                                </span>
-                              </td>
+                          {/* Contacts */}
+                          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
+                            <a href={`mailto:${b.guest_email}`} className="text-[#c86651] hover:underline flex items-center gap-1">
+                              <Icon name="mail" size={12} />
+                              <span className="truncate max-w-[200px]">{b.guest_email}</span>
+                            </a>
+                            {b.guest_phone && (
+                              <a href={`tel:${b.guest_phone}`} className="text-[#727975] hover:text-[#132f27] flex items-center gap-1">
+                                <Icon name="call" size={12} />
+                                <span>{b.guest_phone}</span>
+                              </a>
+                            )}
+                          </div>
 
-                              {/* Total */}
-                              <td className="py-3 px-4 whitespace-nowrap font-medium text-[#132f27]">
-                                ${Number(b.total_price || 0).toLocaleString()}
-                              </td>
+                          {/* Notes preview if present */}
+                          {b.notes && (
+                            <div className="p-2 bg-[#f6f4ed] border-l-2 border-[#ca9f88] text-xs text-[#132f27] flex items-start justify-between gap-2">
+                              <div className="truncate">
+                                <span className="text-[#727975] mr-1">Note:</span>
+                                <span>{b.notes}</span>
+                              </div>
+                              <button
+                                onClick={() => setSelectedBookingNotes(b)}
+                                className="text-[#ca9f88] hover:text-[#132f27] text-[0.7rem] font-semibold underline shrink-0 cursor-pointer"
+                              >
+                                View
+                              </button>
+                            </div>
+                          )}
 
-                              {/* Status */}
-                              <td className="py-3 px-4 text-center whitespace-nowrap">
-                                <span
-                                  className={`inline-block px-2.5 py-0.5 text-[0.62rem] uppercase tracking-wider font-semibold ${
-                                    isPending
-                                      ? 'bg-amber-50 text-amber-900 border border-amber-300'
-                                      : isConfirmed
-                                      ? 'bg-emerald-50 text-emerald-900 border border-emerald-300'
-                                      : 'bg-rose-50 text-rose-900 border border-rose-300'
-                                  }`}
+                          {/* Actions Row */}
+                          <div className="pt-2 border-t border-[rgba(19,47,39,0.08)] flex items-center gap-2">
+                            {isPending ? (
+                              <>
+                                <button
+                                  onClick={() => handleConfirmBooking(b)}
+                                  disabled={loading}
+                                  className="flex-1 py-2 bg-[#132f27] text-white text-xs hover:bg-[#ca9f88] transition-colors font-medium text-center cursor-pointer"
                                 >
-                                  {b.status}
-                                </span>
-                              </td>
-
-                              {/* Notes */}
-                              <td className="py-3 px-4 text-center">
-                                {b.notes ? (
-                                  <button
-                                    onClick={() => setSelectedBookingNotes(b)}
-                                    className="p-1 text-[#ca9f88] hover:text-[#132f27] transition-colors"
-                                    title="View Guest Notes"
-                                  >
-                                    <Icon name="chat" size={16} />
-                                  </button>
-                                ) : (
-                                  <span className="text-[#d1d5db]">—</span>
-                                )}
-                              </td>
-
-                              {/* Actions */}
-                              <td className="py-3 px-4 text-right whitespace-nowrap">
-                                <div className="flex items-center justify-end gap-1.5">
-                                  {isPending && (
-                                    <>
-                                      <button
-                                        onClick={() => handleConfirmBooking(b)}
-                                        disabled={loading}
-                                        className="px-2.5 py-1 bg-[#132f27] text-white text-[0.7rem] hover:bg-[#ca9f88] transition-colors"
-                                        title="Approve & automatically block dates"
-                                      >
-                                        Approve
-                                      </button>
-                                      <button
-                                        onClick={() => handleDeclineBooking(b)}
-                                        disabled={loading}
-                                        className="px-2 py-1 border border-[#c86651]/40 text-[#c86651] text-[0.7rem] hover:bg-[#c86651] hover:text-white transition-colors"
-                                        title="Decline request"
-                                      >
-                                        Decline
-                                      </button>
-                                    </>
-                                  )}
-                                  <button
-                                    onClick={() => handleDeleteBooking(b.id)}
-                                    disabled={loading}
-                                    className="p-1 text-[#9ca3af] hover:text-[#c86651] transition-colors ml-1"
-                                    title="Delete Record"
-                                  >
-                                    <Icon name="delete" size={15} />
-                                  </button>
-                                </div>
-                              </td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
+                                  Approve & Block
+                                </button>
+                                <button
+                                  onClick={() => handleDeclineBooking(b)}
+                                  disabled={loading}
+                                  className="py-2 px-3 border border-[#c86651]/40 text-[#c86651] text-xs hover:bg-[#c86651] hover:text-white transition-colors cursor-pointer"
+                                >
+                                  Decline
+                                </button>
+                              </>
+                            ) : (
+                              <span className="text-[0.7rem] text-[#727975] italic flex-1">
+                                Status: {b.status}
+                              </span>
+                            )}
+                            <button
+                              onClick={() => handleDeleteBooking(b.id)}
+                              disabled={loading}
+                              className="p-2 text-[#9ca3af] hover:text-[#c86651] transition-colors border border-transparent hover:border-[#c86651]/20 cursor-pointer"
+                              title="Delete Record"
+                            >
+                              <Icon name="delete" size={15} />
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
-                </div>
+
+                  {/* DESKTOP VIEW: High-Density Table */}
+                  <div className="hidden md:block bg-white border border-[rgba(19,47,39,0.08)] shadow-sm overflow-hidden">
+                    <div className="overflow-x-auto max-h-[600px] overflow-y-auto">
+                      <table className="w-full text-left border-collapse text-xs">
+                        <thead className="bg-[#fbf9f2] border-b border-[rgba(19,47,39,0.1)] sticky top-0 z-10 text-[0.68rem] uppercase tracking-wider text-[#727975]">
+                          <tr>
+                            <th className="py-3 px-4 font-semibold">Guest & Contact</th>
+                            <th className="py-3 px-4 font-semibold">Suite</th>
+                            <th className="py-3 px-4 font-semibold">Stay Dates</th>
+                            <th className="py-3 px-4 font-semibold">Total</th>
+                            <th className="py-3 px-4 font-semibold text-center">Status</th>
+                            <th className="py-3 px-4 font-semibold text-center">Notes</th>
+                            <th className="py-3 px-4 font-semibold text-right">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-[rgba(19,47,39,0.06)]">
+                          {filteredBookings.map((b) => {
+                            const isPending = b.status === 'pending';
+                            const isConfirmed = b.status === 'confirmed';
+
+                            return (
+                              <tr key={b.id} className="hover:bg-[#f6f4ed]/60 transition-colors">
+                                {/* Guest */}
+                                <td className="py-3 px-4">
+                                  <div className="font-semibold text-[#132f27] text-sm">{b.guest_name}</div>
+                                  <div className="flex items-center gap-2 mt-0.5">
+                                    <a href={`mailto:${b.guest_email}`} className="text-[#c86651] hover:underline">
+                                      {b.guest_email}
+                                    </a>
+                                    {b.guest_phone && (
+                                      <>
+                                        <span className="text-[#d1d5db]">·</span>
+                                        <span className="text-[#727975]">{b.guest_phone}</span>
+                                      </>
+                                    )}
+                                  </div>
+                                </td>
+
+                                {/* Suite */}
+                                <td className="py-3 px-4">
+                                  <span className="font-medium text-[#132f27] block">{b.suite_title}</span>
+                                  <span className="text-[0.65rem] text-[#727975] uppercase tracking-wider">{b.suite_id}</span>
+                                </td>
+
+                                {/* Dates */}
+                                <td className="py-3 px-4 whitespace-nowrap">
+                                  <span className="font-medium text-[#132f27]" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+                                    {b.check_in} → {b.check_out}
+                                  </span>
+                                </td>
+
+                                {/* Total */}
+                                <td className="py-3 px-4 whitespace-nowrap font-medium text-[#132f27]">
+                                  ${Number(b.total_price || 0).toLocaleString()}
+                                </td>
+
+                                {/* Status */}
+                                <td className="py-3 px-4 text-center whitespace-nowrap">
+                                  <span
+                                    className={`inline-block px-2.5 py-0.5 text-[0.62rem] uppercase tracking-wider font-semibold ${
+                                      isPending
+                                        ? 'bg-amber-50 text-amber-900 border border-amber-300'
+                                        : isConfirmed
+                                        ? 'bg-emerald-50 text-emerald-900 border border-emerald-300'
+                                        : 'bg-rose-50 text-rose-900 border border-rose-300'
+                                    }`}
+                                  >
+                                    {b.status}
+                                  </span>
+                                </td>
+
+                                {/* Notes */}
+                                <td className="py-3 px-4 text-center">
+                                  {b.notes ? (
+                                    <button
+                                      onClick={() => setSelectedBookingNotes(b)}
+                                      className="p-1 text-[#ca9f88] hover:text-[#132f27] transition-colors cursor-pointer"
+                                      title="View Guest Notes"
+                                    >
+                                      <Icon name="chat" size={16} />
+                                    </button>
+                                  ) : (
+                                    <span className="text-[#d1d5db]">—</span>
+                                  )}
+                                </td>
+
+                                {/* Actions */}
+                                <td className="py-3 px-4 text-right whitespace-nowrap">
+                                  <div className="flex items-center justify-end gap-1.5">
+                                    {isPending && (
+                                      <>
+                                        <button
+                                          onClick={() => handleConfirmBooking(b)}
+                                          disabled={loading}
+                                          className="px-2.5 py-1 bg-[#132f27] text-white text-[0.7rem] hover:bg-[#ca9f88] transition-colors cursor-pointer"
+                                          title="Approve & automatically block dates"
+                                        >
+                                          Approve
+                                        </button>
+                                        <button
+                                          onClick={() => handleDeclineBooking(b)}
+                                          disabled={loading}
+                                          className="px-2 py-1 border border-[#c86651]/40 text-[#c86651] text-[0.7rem] hover:bg-[#c86651] hover:text-white transition-colors cursor-pointer"
+                                          title="Decline request"
+                                        >
+                                          Decline
+                                        </button>
+                                      </>
+                                    )}
+                                    <button
+                                      onClick={() => handleDeleteBooking(b.id)}
+                                      disabled={loading}
+                                      className="p-1 text-[#9ca3af] hover:text-[#c86651] transition-colors ml-1 cursor-pointer"
+                                      title="Delete Record"
+                                    >
+                                      <Icon name="delete" size={15} />
+                                    </button>
+                                  </div>
+                                </td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </>
               )}
 
               {/* Guest Notes Modal */}
@@ -778,29 +934,37 @@ export default function Admin() {
                           : suiteObj?.title || entry.suite_id;
 
                       return (
-                        <div key={entry.id} className="py-2.5 flex items-center justify-between gap-3 hover:bg-[#f6f4ed]/50 px-2 transition-colors">
-                          <div className="flex items-center gap-3">
+                        <div key={entry.id} className="py-2.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3 hover:bg-[#f6f4ed]/50 px-2.5 border-b border-[rgba(19,47,39,0.05)] sm:border-b-0 transition-colors">
+                          <div className="flex items-center justify-between sm:justify-start gap-2.5">
                             <span
-                              className="text-xs font-semibold text-[#132f27] w-24 shrink-0"
+                              className="text-xs font-semibold text-[#132f27] shrink-0"
                               style={{ fontFamily: "'Montserrat', sans-serif" }}
                             >
                               {entry.date}
                             </span>
-                            <span className="text-[0.62rem] bg-[#132f27]/5 text-[#132f27] px-2 py-0.5 border border-[#132f27]/10 shrink-0">
+                            <span className="text-[0.62rem] bg-[#132f27]/5 text-[#132f27] px-2 py-0.5 border border-[#132f27]/10 shrink-0 font-medium">
                               {suiteLabel}
                             </span>
-                            <span className="text-xs text-[#727975] truncate max-w-xs">
+                            <button
+                              onClick={() => handleUnblockDate(entry.id)}
+                              disabled={loading}
+                              className="sm:hidden text-xs text-[#c86651] hover:underline px-2 py-0.5 cursor-pointer font-medium ml-auto"
+                            >
+                              Unblock
+                            </button>
+                          </div>
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="text-xs text-[#727975] truncate">
                               {entry.reason || 'Blocked'}
                             </span>
+                            <button
+                              onClick={() => handleUnblockDate(entry.id)}
+                              disabled={loading}
+                              className="hidden sm:inline-block text-xs text-[#c86651] hover:underline px-2 py-0.5 shrink-0 cursor-pointer font-medium"
+                            >
+                              Unblock
+                            </button>
                           </div>
-
-                          <button
-                            onClick={() => handleUnblockDate(entry.id)}
-                            disabled={loading}
-                            className="text-xs text-[#c86651] hover:underline px-2 py-0.5 shrink-0"
-                          >
-                            Unblock
-                          </button>
                         </div>
                       );
                     })}

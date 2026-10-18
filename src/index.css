@@ -399,4 +399,17 @@
   .animate-progress {
     animation: progress linear forwards;
   }
+
+  /* Utility to completely hide scrollbars across all browsers */
+  .no-scrollbar::-webkit-scrollbar,
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+  .no-scrollbar,
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
