@@ -40,6 +40,14 @@ import {
   Headphones,
   CheckCircle,
   HelpCircle,
+  RefreshCw,
+  Trash2,
+  MessageSquare,
+  FileText,
+  Upload,
+  ArrowLeft,
+  Search,
+  Inbox,
   LucideProps
 } from 'lucide-react';
 
@@ -104,9 +112,21 @@ const iconMap: Record<string, React.ComponentType<LucideProps>> = {
   groups: Users,
   support_agent: Headphones,
 
-  // Media
+  // Media & Actions
   zoom_in: ZoomIn,
   photo_camera: Camera,
+  upload: Upload,
+  refresh: RefreshCw,
+  refresh_cw: RefreshCw,
+  delete: Trash2,
+  trash: Trash2,
+  chat: MessageSquare,
+  notes: FileText,
+  description: FileText,
+  arrow_back: ArrowLeft,
+  arrow_left: ArrowLeft,
+  search: Search,
+  inbox: Inbox,
 };
 
 export default function Icon({ name, className = '', size = 18, ...props }: IconProps) {
